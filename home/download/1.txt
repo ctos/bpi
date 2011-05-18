@@ -1,0 +1,189 @@
+dsfioahwdfiohadfhaiofhudsf.
+local   filename   to   write:image_funny.html
+
+ H T T P / 1 . 1   2 0 0   O K  
+ S e t - C o o k i e :   B A I D U I D = 7 1 2 1 7 C 3 9 4 A C D 2 0 B 9 D 8 C 0 A F C 8 7 E B F 8 F 2 9 : F G = 1 ;   m a x - a g e = 3 1 5 3 6 0 0 0 ;   e x p i r e s = S u n ,   1 5 - A p r - 1 2   0 8 : 4 6 : 2 3   G M T ;   d o m a i n = . b a i d u . c o m ;   p a t h = / ;   v e r s i o n = 1  
+ P 3 P :   C P = "   O T I   D S P   C O R   I V A   O U R   I N D   C O M   "  
+ C o n t e n t - T y p e :   t e x t / h t m l  
+ E T a g :   " 6 4 3 4 3 6 8 2 3 "  
+ A c c e p t - R a n g e s :   b y t e s  
+ L a s t - M o d i f i e d :   M o n ,   2 1   F e b   2 0 1 1   0 6 : 1 7 : 0 7   G M T  
+ E x p i r e s :   S a t ,   1 6   A p r   2 0 1 1   0 9 : 4 6 : 2 3   G M T  
+ C a c h e - C o n t r o l :   m a x - a g e = 3 6 0 0  
+ V a r y :   A c c e p t - E n c o d i n g  
+ C o n t e n t - L e n g t h :   9 0 2 8  
+ C o n n e c t i o n :   c l o s e  
+ D a t e :   S a t ,   1 6   A p r   2 0 1 1   0 8 : 4 6 : 2 3   G M T  
+ S e r v e r :   A p a c h e  
+  
+ < ! D O C T Y P E   H T M L   P U B L I C   " - / / W 3 C / / D T D   H T M L   4 . 0 1 / / E N "   " h t t p : / / w w w . w 3 . o r g / T R / h t m l 4 / s t r i c t . d t d " >  
+ < h t m l >  
+ 	 < h e a d >  
+ 	 	 < b a s e   t a r g e t = " _ b l a n k " >  
+ 	 	 < m e t a   h t t p - e q u i v = " C o n t e n t - T y p e "   c o n t e n t = " t e x t / h t m l ;   c h a r s e t = G B K " >  
+ 	 	 < m e t a   h t t p - e q u i v = " X - U A - C o m p a t i b l e "   c o n t e n t = " I E = E m u l a t e I E 7 "   / >  
+ 	 	 < t i t l e > ± ¬ Ð ¦ È ¤ Í ¼ - ° Ù ¶ È Í ¼ Æ ¬ Ä ¿ Â ¼ < / t i t l e >  
+ 	 	 < l i n k   r e l = " s t y l e s h e e t "   h r e f = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / c s s / c o m m o n c s s . c s s ? v = 2 0 1 0 1 2 2 7 . c s s " / >  
+ < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / j s / _ r e t u r n t o p . j s " > < / s c r i p t >  
+                 < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / j s / f _ s u b m i t . j s " > < / s c r i p t >  
+ 	 	 < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / j s / i c 0 1 . j s ? v = 1 . 3 . j s " > < / s c r i p t >  
+ 	 	 < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / j s / t a g c l o u d . j s ? v = 2 . 3 . j s " > < / s c r i p t >  
+ 	 	 < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / i n f o / f u n n y G a l l e r y D a t a . j s " > < / s c r i p t >  
+ 	 	 < s c r i p t   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / i n f o / f u n n y T a g . j s " > < / s c r i p t >  
+   	 	 < s c r i p t   t y p e = " t e x t / j a v a s c r i p t " > v a r   a r r B a i d u A d s = n e w   A r r a y ( ) ; f u n c t i o n   b a i d u A d s D i s p l a y ( i n d e x ) { d o c u m e n t . w r i t e ( a r r B a i d u A d s [ i n d e x ] ) } ; < / s c r i p t >  
+ 	 	 < s c r i p t   t y p e = " t e x t / j a v a s c r i p t "   s r c = " h t t p : / / a . b a i d u . c o m / e c o m ? d i = 5 3 9 & t m = b a i d u A S P G B a n n e r T R H & w o r d = e n c o d e U R I C o m p o n e n t ( ' ° Ù ¶ È Í ¼ Æ ¬ Ä ¿ Â ¼ Ò ³ - ± ¬ Ð ¦ È ¤ Í ¼ ' ) " > < / s c r i p t >  
+ < s c r i p t >    
+ f u n c t i o n   s ( o , p ) { i f ( d o c u m e n t . f 1 . w o r d . v a l u e . l e n g t h > 0 ) { v a r   o h = o . h r e f ; v a r   w d = e n c o d e U R I C o m p o n e n t ( d o c u m e n t . f 1 . w o r d . v a l u e ) ; i f ( o h . i n d e x O f ( " q = " ) ! = - 1 ) { o . h r e f = o h . r e p l a c e ( n e w   R e g E x p ( " q = [ ^ & $ ] * " ) , " q = " + w d ) ; } e l s e { v a r   s = p ? " & " : " ? " ; o . h r e f = o . h r e f + s + " q = " + w d } ; } } < / s c r i p t >  
+                
+ 	 < / h e a d >  
+ 	 < b o d y > < a   i d = " r e t u r n t o p "   h r e f = " # 0 "   t a r g e t = " _ s e l f " > < i m g   s r c = " h t t p : / / l i s t . i m a g e . b a i d u . c o m / t / i m a g e _ c a t e g o r y / i m g / r e t u r n . g i f " > < / a > < a   n a m e = " 0 " > < / a >  
+ 	 	 < d i v   i d = " l o g " > < / d i v >  
+ 	 	 < d i v   i d = " w r a p p e r " >  
+ 	 	 	 < d i v   i d = " h e a d e r " >  
+ 	 	 	 	 < a   n a m e = " 0 " > < / a >  
+ 	 	 	 	 < f o r m   a c t i o n = " h t t p : / / i m a g e . b a i d u . c o m / i "   n a m e = " f 1 "   o n s u b m i t = " r e t u r n   f _ s u b m i t ( t h i s ) " >  
+ 	 	 	 	     < i n p u t   t y p e = " h i d d e n "   n a m e = " t n "   v a l u e = " b a i d u i m a g e " >  
+ 	 	 	 	     < i n p u t   n a m e = " c t "   t y p e = " h i d d e n "   v a l u e = " 2 0 1 3 2 6 5 9 2 " >  
+ 	 	 	 	     < i n p u t   n a m e = " c l "   t y p e = " h i d d e n "   v a l u e = " 2 " >  
+ 	 	 	 	     < i n p u t   n a m e = " l m "   t y p e = " h i d d e n "   v a l u e = " - 1 " >  
+ 	 	 	 	     < i n p u t   n a m e = " f r "   t y p e = " h i d d e n "   v a l u e = " " >  
+ 	 	 	 	     < i n p u t   n a m e = " p v "   t y p e = " h i d d e n "   v a l u e = " " >  
+ 	 	 	 	     < i n p u t   n a m e = " z "   t y p e = " h i d d e n "   v a l u e = " 0 " >  
+ 	 	 	 	     < t a b l e   w i d t h = " 1 0 0 % "   a l i g n = " c e n t e r "   c e l l p a d d i n g = " 0 "   c e l l s p a c i n g = " 0 "   i d = " h t b " >  
+ 	 	 	 	       < t r   v a l i g n = " m i d d l e " >  
+ 	 	 	 	         < t d   i d = " b l o g o "   v a l i g n = " t o p " >  
+ 	 	 	 	           < a   h r e f = " / " >  
+ 	 	 	 	             < i m g   s r c = " h t t p : / / i m g . b a i d u . c o m / i m g / i m g - j g . g i f "   a l t = " µ ½ ° Ù ¶ È Í ¼ Æ ¬ Ê × Ò ³ " >  
+ 	 	 	 	           < / a >  
+ 	 	 	 	         < / t d >  
+ 	 	 	 	         < t d   v a l i g n = " t o p " >  
+ 	 	 	 	           < d i v   c l a s s = " t i t " >  
+ 	 	 	 	         < a   h r e f = " h t t p : / / n e w s . b a i d u . c o m / "   o n c l i c k = " r e t u r n   s ( t h i s ) " > Ð Â Î Å < / a > < a   o n c l i c k = " r e t u r n   s ( t h i s ) "   h r e f = " h t t p : / / w w w . b a i d u . c o m / "   o n m o u s e d o w n = " s e t P s U r l ( t h i s , 1 ) " > Í ø Ò ³ < / a > < a   o n c l i c k = " r e t u r n   s ( t h i s ) "   h r e f = " h t t p : / / t i e b a . b a i d u . c o m / " > Ì ù ° É < / a > < a     o n c l i c k = " r e t u r n   s ( t h i s ) "   h r e f = " h t t p : / / z h i d a o . b a i d u . c o m / " > Ö ª µ À < / a > < a     o n c l i c k = " r e t u r n   s ( t h i s ) "   h r e f = " h t t p : / / m p 3 . b a i d u . c o m / " > M P 3 < / a > < s t r o n g > Í ¼ Æ ¬ < / s t r o n g > < a     o n c l i c k = " r e t u r n   s ( t h i s ) "   h r e f = " h t t p : / / v i d e o . b a i d u . c o m / "   c l a s s = " t o p " > Ê Ó Æ µ < / a > < a   o n c l i c k = " r e t u r n   s ( t h i s ) "     h r e f = " h t t p : / / m a p . b a i d u . c o m / "   c l a s s = " t o p " > µ Ø Í ¼ < / a >  
+ 	 	 	 	           < / d i v >  
+ 	 	 	 	           < t a b l e   c e l l s p a c i n g = " 0 "   c e l l p a d d i n g = " 0 " >  
+ 	 	 	 	             < t r >  
+ 	 	 	 	               < t d   v a l i g n = " t o p "   n o w r a p >  
+ 	 	 	 	                   < d i v   i d = " s u g O u t " > < s p a n   i d = " s u g I n " > < i n p u t   t y p e = " t e x t "   n a m e = " w o r d "   s i z e = 3 5   m a x l e n g t h = " 1 2 0 "   c l a s s = " i "   i d = " k w "     a u t o c o m p l e t e = " o f f " > < / s p a n >  
+ 	 	 	 	                   < d i v   i d = " s u g " > < / d i v > < d i v   i d = " s u g O f f " > < / d i v > < I N P U T   c l a s s = " s b "   t y p e = s u b m i t   v a l u e = ° Ù ¶ È Ò » Ï Â > < / d i v > 	 	    
+ 	 	 	 	               < / t d >  
+ 	 	 	 	               < t d   v a l i g n = " m i d d l e "   n o w r a p >  
+ 	 	 	 	                 < a   h r e f = " h t t p : / / w w w . b a i d u . c o m / s e a r c h / i m a g e _ h e l p . h t m l "   c l a s s = " h p "   o n c l i c k = " p ( e v e n t , 2 ) ; "   t a r g e t = " _ b l a n k " > ° ï Ö ú < / a > < e m > | < / e m > < a   h r e f = " / g a o j i / a d v a n c e d . h t m l "   o n c l i c k = " p ( e v e n t , 3 ) ; " > ¸ ß ¼ ¶ Ë Ñ Ë ÷ < / a >  
+ 	 	 	 	               < / t d >  
+ 	 	 	 	             < / t r >  
+ 	 	 	 	           < / t a b l e >  
+ 	 	 	 	           < l a b e l   f o r = " n e w s p i c " > < i n p u t   t y p e = " r a d i o "   n a m e = " s "   i d = " n e w s p i c "   v a l u e = " 0 "   > Ð Â Î Å Í ¼ Æ ¬ < / l a b e l > & n b s p ; & n b s p ;  
+ 	 	 	 	 	   < l a b e l   f o r = " a l l P i c " > < i n p u t   t y p e = " r a d i o "   n a m e = " s "   i d = " a l l P i c "   v a l u e = " 0 "   c h e c k e d   > È « ² ¿ Í ¼ Æ ¬ < / l a b e l > & n b s p ; & n b s p ;  
+ 	 	 	 	 	   < l a b e l   f o r = " w a l l P i c " > < i n p u t   t y p e = " r a d i o "   n a m e = " s "   i d = " w a l l P i c "   v a l u e = " 1 " > ± Ú Ö ½ < / l a b e l > & n b s p ; & n b s p ;  
+ 	 	 	 	 	   < l a b e l   f o r = " e m o P i c " > < i n p u t   t y p e = " r a d i o "   n a m e = " s "   i d = " e m o P i c "   v a l u e = " 2 " > ± í Ç é < / l a b e l > & n b s p ; & n b s p ;  
+ 	 	 	 	 	   < l a b e l   f o r = " h e a d P i c " > < i n p u t   t y p e = " r a d i o "   n a m e = " s "   i d = " h e a d P i c "   v a l u e = " 3 " > Í · Ï ñ < / l a b e l > 	 	 	 	         < / t d >  
+ 	 	 	 	       < / t r >  
+ 	 	 	 	     < / t a b l e >  
+ 	 	 	 	   < / f o r m >  
+ 	 	 	 < / d i v >  
+ 	 	 	 < d i v   i d = " c o n t a i n e r " >  
+ 	 	 	 	 < d i v   i d = " m a i n C a t e g o r y " >  
+ 	 	 	 	 	 < f i e l d s e t >  
+ 	 	 	 	 	 	 < l e g e n d > < s t r o n g > Í ¼ Æ ¬ · Ö À à Ä ¿ Â ¼ < / s t r o n g > < / l e g e n d >  
+ 	 	 	 	 	 	 < t a b l e >  
+ 	 	 	 	 	 	 	 < t r >    
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ r e c o m m e n d . h t m l " > ¾ « Æ · Í Æ ¼ ö < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ w o m e n _ s t a r s 1 . h t m l " > Ã À Å ® Ã ÷ Ð Ç < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ m e n _ s t a r s 1 . h t m l " > Ë § ¸ ç Ã ÷ Ð Ç < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ c a r t o o n . h t m l " > ¿ ¨ Í ¨ ¶ ¯ Â þ < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ m o v i e . h t m l " > µ ç Ó ° µ ç Ê Ó < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ t r a v e l . h t m l " > · ç ¾ ° Ã û Ê ¤ < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " f a c e _ n e w . h t m l " > Í · Ï ñ ± í Ç é < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ c a r . h t m l " > Ã û ³ µ ¼ ø É Í < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ m i l i t a r y . h t m l " > ¾ ü Ê Â Î ä Æ ÷ < / a > < / t d >  
+ 	 	 	 	 	 	 	 < / t r >  
+ 	 	 	 	 	 	 	 < t r >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ w a l l p a p e r . h t m l " > ¾ « Ã À ± Ú Ö ½ < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t "     i d = " l i s t _ n o w " > < s t r o n g > ± ¬ Ð ¦ È ¤ Í ¼ < / s t r o n g > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ a n i m a l . h t m l " > ¶ ¯ Î ï Ö ² Î ï < / a > < / t d >  
+ 	 	 	 	 	 	 	 	 < t d   c l a s s = " l i s t " > < a   t a r g e t = " _ s e l f "   h r e f = " i m a g e _ c o l l e c t i o n . h t m l " > Ò Õ Ê õ Ê Õ ² Ø < / a > < / t d >  
+ 	 	 	 	 	 	 	 < / t r >  
+ 	 	 	 	 	 	 < / t a b l e >  
+ 	 	 	 	 	 < / f i e l d s e t >  
+ 	 	 	 	 < / d i v >  
+ 	 	 	 	 < d i v   c l a s s = " a d _ b n r " > < s c r i p t   t y p e = " t e x t / j a v a s c r i p t " > b a i d u A d s D i s p l a y ( 5 3 9 ) < / s c r i p t > < / d i v > 	 	 	 	  
+ 	 	 	 	 < d i v   c l a s s = " i n n e r N a v _ d i v " >  
+                                         < u l   c l a s s = " i n n e r N a v   c l e a r f i x " >  
+                                                 < l i > < a   h r e f = " # 1 "   t a r g e t = " _ s e l f " > ± ¬ Ð ¦ Ç ¿ È Ë < / a > < / l i >  
+                                                 < l i > < a   h r e f = " # 2 "   t a r g e t = " _ s e l f " > É ú » î Æ æ È ¤ < / a > < / l i >  
+                                                 < l i > < a   h r e f = " # 3 "   t a r g e t = " _ s e l f " > ¸ ã Ð ¦ ¶ ¯ Â þ < / a > < / l i >  
+                                         < / u l >  
+ 	 	 	 	 < / d i v >  
+ 	 	 	 	 < d i v   i d = " i t e m s " >  
+ 	 	 	 	 	 < d i v   i d = " i t e m 1 "   >  
+ 	 	 	 	 	 	 < h 1 > < a   n a m e = " 1 " > < / a > ± ¬ Ð ¦ Ç ¿ È Ë < / h 1 >  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 1 C o n t e n t _ d i v "   s t y l e = " p a d d i n g - l e f t : 1 5 p x ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t   t y p e = " t e x t / j a v a s c r i p t " >  
+ 	 	 	 	 	 	 	 v a r   c o n f   =   {  
+ 	 	 	 	 	 	 	 	 s l i d e r I d : " i t e m 1 C o n t e n t _ d i v " ,  
+ 	 	 	 	 	 	 	 	 p i c W i d t h : 1 4 0 ,  
+ 	 	 	 	 	 	 	 	 p i c H e i g h t   : 1 0 5 ,  
+ 	 	 	 	 	 	 	 	 s l i d e r W i d t h   :   9 3 0 ,  
+ 	 	 	 	 	 	 	 	 p i c D a t a   :   R a n d o m A r r a y ( f u n n y p e r s o n G a l l e r y D a t a . d a t a ) ,  
+ 	 	 	 	 	 	 	 	 i m g P r e U r l   :   " h t t p : / / i m a g e . b a i d u . c o m / i ? t n = b a i d u i m a g e d e t a i l & c t = 5 0 3 3 1 6 4 8 0 & c l = 2 & l m = - 1 & i s t y p e = 2 & f r = m l 1 & p v = & i c = 0 & z = 0 & s = 0 & f m q = m 1 1 & w o r d = "  
+ 	 	 	 	 	 	 	 }  
+ 	 	 	 	 	 	 	 v a r   s l i d e r 1   =   n e w   B D . I M G . c a t e g o r y . s l i d e r ( c o n f ) ;  
+ 	 	 	 	 	 	 	 s l i d e r 1 . i n i ( ) ;  
+ 	 	 	 	 	 	 < / s c r i p t >  
+ 	 	 	 	 	 	  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 1 T a g _ d i v "   c l a s s = " t a g C l o u d " > < / d i v > < d i v   s t y l e = " c l e a r : b o t h ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t >  
+ 	 	 	 	 	 	 	 t a g c l o u d ( f u n n y p e r s o n T a g D a t a , " i t e m 1 T a g _ d i v " , " m 1 1 " , " 0 " ) ;  
+ 	 	 	 	 	 	 < / s c r i p t >  
+ 	 	 	 	 	 < / d i v >  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 2 "   >  
+ 	 	 	 	 	 	 < h 1 > < a   n a m e = " 2 " > < / a > É ú » î Æ æ È ¤ < / h 1 >  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 2 C o n t e n t _ d i v "   s t y l e = " p a d d i n g - l e f t : 1 5 p x ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t   t y p e = " t e x t / j a v a s c r i p t " >  
+ 	 	 	 	 	 	 	 v a r   c o n f   =   {  
+ 	 	 	 	 	 	 	 	 s l i d e r I d : " i t e m 2 C o n t e n t _ d i v " ,  
+ 	 	 	 	 	 	 	 	 p i c W i d t h : 1 4 0 ,  
+ 	 	 	 	 	 	 	 	 p i c H e i g h t   : 1 0 5 ,  
+ 	 	 	 	 	 	 	 	 s l i d e r W i d t h   :   9 3 0 ,  
+ 	 	 	 	 	 	 	 	 p i c D a t a   :   R a n d o m A r r a y ( f u n n y t h i n g G a l l e r y D a t a . d a t a ) ,  
+ 	 	 	 	 	 	 	 	 i m g P r e U r l   :   " h t t p : / / i m a g e . b a i d u . c o m / i ? t n = b a i d u i m a g e d e t a i l & c t = 5 0 3 3 1 6 4 8 0 & c l = 2 & l m = - 1 & i s t y p e = 2 & f r = m l 1 & p v = & i c = 0 & z = 0 & s = 0 & f m q = m 1 1 & w o r d = "  
+ 	 	 	 	 	 	 	 }  
+ 	 	 	 	 	 	 	 v a r   s l i d e r 2   =   n e w   B D . I M G . c a t e g o r y . s l i d e r ( c o n f ) ;  
+ 	 	 	 	 	 	 	 s l i d e r 2 . i n i ( ) ;  
+ 	 	 	 	 	 	 < / s c r i p t > 	 	 	 	 	 	  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 2 T a g _ d i v "   c l a s s = " t a g C l o u d " > < / d i v > < d i v   s t y l e = " c l e a r : b o t h ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t >  
+ 	 	 	 	 	 	 	 t a g c l o u d ( f u n n y t h i n g T a g D a t a , " i t e m 2 T a g _ d i v " , " m 1 1 " , " 0 " ) ;  
+ 	 	 	 	 	 	 < / s c r i p t >  
+ 	 	 	 	 	 < / d i v >  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 3 "   >  
+ 	 	 	 	 	 	 < h 1 > < a   n a m e = " 3 " > < / a > ¸ ã Ð ¦ ¶ ¯ Â þ < / h 1 >  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 3 C o n t e n t _ d i v "   s t y l e = " p a d d i n g - l e f t : 1 5 p x ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t   t y p e = " t e x t / j a v a s c r i p t " >  
+ 	 	 	 	 	 	 	 v a r   c o n f   =   {  
+ 	 	 	 	 	 	 	 	 s l i d e r I d : " i t e m 3 C o n t e n t _ d i v " ,  
+ 	 	 	 	 	 	 	 	 p i c W i d t h : 1 4 0 ,  
+ 	 	 	 	 	 	 	 	 p i c H e i g h t   : 1 0 5 ,  
+ 	 	 	 	 	 	 	 	 s l i d e r W i d t h   :   9 3 0 ,  
+ 	 	 	 	 	 	 	 	 p i c D a t a   :   R a n d o m A r r a y ( f u n n y c a r t o o n G a l l e r y D a t a . d a t a ) ,  
+ 	 	 	 	 	 	 	 	 i m g P r e U r l   :   " h t t p : / / i m a g e . b a i d u . c o m / i ? t n = b a i d u i m a g e d e t a i l & c t = 5 0 3 3 1 6 4 8 0 & c l = 2 & l m = - 1 & i s t y p e = 2 & f r = m l 1 & p v = & i c = 0 & z = 0 & s = 0 & f m q = m 1 1 & w o r d = "  
+ 	 	 	 	 	 	 	 }  
+ 	 	 	 	 	 	 	 v a r   s l i d e r 3   =   n e w   B D . I M G . c a t e g o r y . s l i d e r ( c o n f ) ;  
+ 	 	 	 	 	 	 	 s l i d e r 3 . i n i ( ) ;  
+ 	 	 	 	 	 	 < / s c r i p t >  
+ 	 	 	 	 	 	  
+ 	 	 	 	 	 	 < d i v   i d = " i t e m 3 T a g _ d i v "   c l a s s = " t a g C l o u d " > < / d i v > < d i v   s t y l e = " c l e a r : b o t h ; " > < / d i v >  
+ 	 	 	 	 	 	 < s c r i p t >  
+ 	 	 	 	 	 	 	 t a g c l o u d ( f u n n y c a r t o o n T a g D a t a , " i t e m 3 T a g _ d i v " , " m 1 1 " , " 0 " ) ;  
+ 	 	 	 	 	 	 < / s c r i p t >  
+ 	 	 	 	 	 < / d i v >  
+ 	 	 	 	 	  
+ 	 	 	 	 < / d i v >  
+ 	 	 	 < / d i v >  
+ 	 	 < / d i v >  
+  
+     < d i v   i d = " f t " >  
+       < s p a n > ´ Ë Ä Ú È Ý Ï µ ° Ù ¶ È × Ô ¶ ¯ Ë Ñ Ë ÷ µ Ä ½ á ¹ û , ¿ É Ä Ü Ê Ü Ö ø × ÷ È ¨ ± £ » ¤ , ° Ù ¶ È Ó ë Ä Ú È Ý µ Ä ³ ö ´ ¦ Î Þ ¹ Ø , Ç ë Ô Ú » ñ µ Ã È ¨ À û È Ë ( È ç Ó Ð ) º Ï · ¨ Ê Ú È ¨ º ó Ê ¹ Ó Ã ¡ £ È ç Ó Ð Ò É Î Ê Ç ë ² Î ¿ ¼ < a   t a r g e t = _ b l a n k   h r e f = h t t p : / / w w w . b a i d u . c o m / s e a r c h / a p p c o p y r i g h t . h t m l > È ¨ À û É ù Ã ÷ < / a > < / s p a n >  
+       < d i v > & c o p y ; 2 0 1 1   B a i d u < / d i v >  
+     < / d i v >  
+ 	 < / b o d y >  
+ < / h t m l > 

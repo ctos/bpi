@@ -1,0 +1,11 @@
+subsystem cookie 1024;
+
+#include <hurd/hurd_types.defs>
+routine send_message(
+	port: mach_port_t;
+	in	send_message:string_t
+	);
+routine get_message(
+	port:mach_port_t;
+	out	recv_message:string_t
+	);

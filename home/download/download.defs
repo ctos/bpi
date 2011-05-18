@@ -1,0 +1,25 @@
+subsystem download 2011;
+
+#include <hurd/hurd_types.defs>
+
+type	bpi_response = struct [3] of int;
+
+import "download_types.h";
+
+routine send_message(
+	port	: mach_port_t;
+	in	message : string_t
+);
+routine get_message(
+	port	: mach_port_t;
+	out	message: string_t
+);
+routine create_request(
+	port	: mach_port_t;
+	in	host : string_t;
+	out	response: bpi_response
+);
+routine send_request(
+	port	: mach_port_t;
+	in	request:string_t
+);

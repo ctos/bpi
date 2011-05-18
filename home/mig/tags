@@ -1,0 +1,57 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BAD_TYPECHECK	migServer.c	30;"	d	file:
+BAD_TYPECHECK	migUser.c	33;"	d	file:
+EXPORT_BOOLEAN	migServer.c	7;"	d	file:
+EXPORT_BOOLEAN	migUser.c	6;"	d	file:
+MACH_MSGH_BITS_REPLY	migServer.c	36;"	d	file:
+MACH_MSGH_BITS_REQUEST	migServer.c	34;"	d	file:
+S_getnum	migUser.c	/^mig_external kern_return_t S_getnum$/;"	f
+S_getnum	server.c	/^kern_return_t S_getnum(mach_port_t in, int *value)$/;"	f
+S_mig_server	migServer.c	/^mig_external boolean_t S_mig_server$/;"	f
+S_mig_server_routine	migServer.c	/^mig_external mig_routine_t S_mig_server_routine$/;"	f
+S_mig_server_routines	migServer.c	/^static mig_routine_t S_mig_server_routines[] = {$/;"	v	file:
+S_setnum	migUser.c	/^mig_external kern_return_t S_setnum$/;"	f
+S_setnum	server.c	/^kern_return_t S_setnum(mach_port_t in, int value)$/;"	f
+TypeCheck	migServer.c	23;"	d	file:
+TypeCheck	migUser.c	26;"	d	file:
+UseExternRCSId	migServer.c	27;"	d	file:
+UseExternRCSId	migUser.c	30;"	d	file:
+_GNU_SOURCE	client.c	2;"	d	file:
+_GNU_SOURCE	client1.c	2;"	d	file:
+_GNU_SOURCE	migServer.c	4;"	d	file:
+_GNU_SOURCE	migUser.c	2;"	d	file:
+_GNU_SOURCE	server.c	2;"	d	file:
+_Xgetnum	migServer.c	/^mig_internal void _Xgetnum$/;"	f
+_Xsetnum	migServer.c	/^mig_internal void _Xsetnum$/;"	f
+_mig_user_	mig.h	2;"	d
+data	server.c	/^int data;$/;"	v
+data_port	mig.h	/^	mach_port_t data_port;$/;"	v
+demuxer	server.c	/^int demuxer(mach_msg_header_t * in, mach_msg_header_t *out)$/;"	f
+main	client.c	/^int main()$/;"	f
+main	client1.c	/^int main()$/;"	f
+main	server.c	/^int main()$/;"	f
+mig_external	migServer.c	19;"	d	file:
+mig_external	migUser.c	22;"	d	file:
+mig_internal	migServer.c	15;"	d	file:
+mig_internal	migUser.c	18;"	d	file:
+msgh_reply_port	migServer.c	35;"	d	file:
+msgh_reply_port	migUser.c	37;"	d	file:
+msgh_request_port	migServer.c	33;"	d	file:
+msgh_request_port	migUser.c	36;"	d	file:
+num	mig.h	/^	int *num;$/;"	v
+num	mig.h	/^	int num;$/;"	v
+trivfs_allow_open	server.c	/^int trivfs_allow_open = 0x00;$/;"	v
+trivfs_cntl_nportclasses	server.c	/^int trivfs_cntl_nportclasses = 0;$/;"	v
+trivfs_fsid	server.c	/^int trivfs_fsid = 0;$/;"	v
+trivfs_fstype	server.c	/^int trivfs_fstype = FSTYPE_MISC;$/;"	v
+trivfs_goaway	server.c	/^error_t trivfs_goaway(struct trivfs_control *fsys, int flags)$/;"	f
+trivfs_modify_stat	server.c	/^void trivfs_modify_stat(struct trivfs_protid * cred, io_statbuf_t *st)$/;"	f
+trivfs_proid_nportclasses	server.c	/^int trivfs_proid_nportclasses = 0;$/;"	v
+trivfs_support_exec	server.c	/^int trivfs_support_exec = 0;$/;"	v
+trivfs_support_read	server.c	/^int trivfs_support_read = 0;$/;"	v
+trivfs_support_write	server.c	/^int trivfs_support_write = 0;$/;"	v

@@ -1,0 +1,15 @@
+subsystem cache 4066;
+
+#include <hurd/hurd_types.defs>
+
+routine send_message(
+	send_port : mach_port_t;
+	in	message	  : string_t
+); 
+
+routine get_message(
+	recv_port : mach_port_t;
+	out message	  : string_t
+); 
+
+

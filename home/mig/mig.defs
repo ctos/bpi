@@ -1,0 +1,18 @@
+subsystem mig 560;
+
+#include <hurd/hurd_types.defs>
+
+
+type	 string25=(MSG_TYPE_STRING_C,8*25) ;
+
+
+
+INTR_INTERFACE
+routine getnum(
+	data_port : mach_port_t;
+	out 	num: int
+	);
+routine setnum(
+	data_port : mach_port_t;
+	in	num : int
+	);
