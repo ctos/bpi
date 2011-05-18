@@ -1,0 +1,12 @@
+subsystem test 437;
+
+#include <mach/std_types.defs>
+
+simpleroutine send(
+	RequestPort sendPort : mach_port_t;
+	in		num  : int
+);
+routine receive(
+	RequestPort recvPort : mach_port_t;
+	out 		num : int
+);

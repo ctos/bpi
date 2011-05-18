@@ -1,0 +1,41 @@
+-*- Text -*-
+This is the GNU Mach 1.2 distribution.
+
+This kernel is derived from the Utah kernel source.  We use it to run
+the Hurd on.  It is being distributed by us so that we can more easily
+modify the source, and so that it will work with the normal GNU coding
+standards and Makefile conventions.
+
+libmach, bootloaders, default pagers, and the like are not part of
+this distribution.  For libraries, we refer you to the GNU C library,
+which has Mach support.  For bootloaders, we refer you to GRUB.  (This
+kernel can be loaded by any bootloader that uses the multiboot
+standard.)  For default pagers, we refer you to your particular system
+that you will run on top of Mach.
+
+The interface generator `MiG' is no longer part of this distribution.
+
+Generic installation instructions may be found in the file INSTALL.
+
+By default, you get a kernel with no device drivers for disks and
+network devices.  This is not what you want!  Examine the file
+`README-Drivers' in the directory for the machine type your kernel is
+on (e.g., `i386/README-Drivers') for a list of configure --enable
+switches.  Give the appropriate set for your hardware.  It is
+generally safe to specify switches for hardware you don't have; in
+this way you can build kernels that work on different physical machine
+set ups.
+
+If you want the in-kernel debugger compiled in, specify --enable-kdb
+to configure.  This is only useful if you actually anticipate
+debugging the kernel, of course.  We don't turn it on be default
+because it adds considerably to the unpageable memory footprint of the
+kernel.
+
+The specific switches you give to configure are always recorded in the
+file `config.status'.  So you can always tell what options you used to
+build a particular kernel.
+
+Bug reports relating to this distribution should be sent to
+bug-hurd@gnu.org.  Requests for assistance should be made on
+help-hurd@gnu.org.

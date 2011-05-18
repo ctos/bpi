@@ -1,0 +1,8 @@
+00_clean_gfdl.patch
+10_cdromlock.patch
+11_ignore_CSIn.patch
+13_ide_dma.patch
+24_pci_irq_fix.patch
+40_iopl_mem.patch
+50_initrd.patch
+60_bigmem.patch

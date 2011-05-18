@@ -1,0 +1,15 @@
+Mach's GFDL documentation is not DFSG-free, we need to drop the build rules.
+
+Index: b/Makefile.am
+===================================================================
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -117,7 +117,7 @@ include Makefrag.am
+ include tests/Makefrag.am
+ 
+ # Documentation.
+-include doc/Makefrag.am
++#include doc/Makefrag.am
+ 
+ #
+ # Kernel Image

@@ -1,0 +1,15 @@
+diff --git a/i386/i386at/kd.c b/i386/i386at/kd.c
+index eaeea1b..03c1e06 100644
+--- a/i386/i386at/kd.c
++++ b/i386/i386at/kd.c
+@@ -1754,6 +1754,10 @@ u_char	*cp;
+ 			kd_erase(number[0]);
+ 		esc_spt = esc_seq;
+ 		break;
++	case 'n':
++		/* Ignore status/cursor report request */
++		esc_spt = esc_seq;
++		break;
+ 	case '\0':
+ 		break;			/* not enough yet */
+ 	default:

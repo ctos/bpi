@@ -1,0 +1,15 @@
+Push kernel/user limit to 2GiB, so Mach can address up to close to 2GiB memory.
+This makes glibc's local-bigmem.diff patch mandatory.
+
+diff --git a/i386/include/mach/i386/vm_param.h b/i386/include/mach/i386/vm_param.h
+index 6d7c5f3..839ae68 100644
+--- a/i386/include/mach/i386/vm_param.h
++++ b/i386/include/mach/i386/vm_param.h
+@@ -73,6 +73,6 @@
+    with that.
+    */
+ #define VM_MIN_ADDRESS		(0)
+-#define VM_MAX_ADDRESS		(0xc0000000UL)
++#define VM_MAX_ADDRESS		(0x80000000UL)
+ 
+ #endif	/* _MACH_I386_VM_PARAM_H_ */

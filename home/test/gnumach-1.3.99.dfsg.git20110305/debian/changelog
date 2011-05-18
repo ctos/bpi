@@ -1,0 +1,801 @@
+gnumach (2:1.3.99.dfsg.git20110305-1) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * New upstream snapshot
+    - debian/patches/50_initrd.patch: Refresh.
+  * debian/rules: Add rules to build Xen variants of gnumach.
+  * debian/source/options: Enable bz2 compression.
+  * debian/patches/60_bigmem.patch: Add patch to support almost up to 2GiB
+    memory.
+  * debian/rules: Rename /boot/gnumach* into
+    /boot/gnumach-1.3.99-{xen-,}486{,-dbg}
+  * debian/control:
+    - Rename gnumach{,-dbg} into gnumach-image-1.3.99-486{,-dbg} (except in
+    udebs).
+    - Add gnumach-image-1.3.99-xen-486{,-dbg} containing Xen variants of gnumach
+    - Add gnumach-common to contain msgids and info documentation shared by
+    gnumach-image-1.3.99 packages, which now depend on it and replace the
+    previous gnumach package.
+    - Add gnumach-image-{xen-,}486, which depend on
+    gnumach-image-1.3.99-{xen-,}486.
+    - Re-add gnumach{,-dbg} packages, which depend on gnumach-image-486 and
+    gnumach-image-1.3.99-486-dbg, make these packages break grub-pc versions
+    before the one which generate menu entries for all /boot/gnumach* files.
+    - Rename gnumach-udeb into kernel-image-1.3.99-486-di.
+    - Add kernel-image-1.3.99-xen-486-di.
+    - Use Package-Type instead of XC-Package-Type.
+    - Make gnumach packages break glibc versions before the one which can cope
+    with > 1GiB memory support.
+    - Fix upstream URL (Closes: Bug#604257).
+  * debian/rules: Apply package renames in $(pkg{,_xen,_udeb,_dbg,_xen_dbg).
+  * debian/gnumach*.{install,docs}: Rename accordingly.
+  * debian/patches/11_ignore_CSIn.patch: Ignore \E[6n emited by busybox.
+  * debian/gnumach-image.{preinst,postinst,prerm,postrm}: Add script to get
+    e.g. update-grub called.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 31 Jul 2010 17:35:20 +0200
+
+gnumach (2:1.3.99.dfsg.git20100732-1) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * New upstream snapshot.
+  * debian/control
+    - (gnumach-udeb): Add XC- prefix to Package-Type. Add Provides:
+    kernel-image, *-modules.
+    - Remove duplicate priority and section fields.
+    - Add ${misc:Depends}.
+  * debian/patches/40_iopl_mem.patch: Add patch, not enabled yet, to be used
+    instead of 40_iopl_mmap.patch when a new snapshot is taken.
+  * debian/patches/40_iopl_mmap.patch: Add a "mem" alias for the iopl device,
+    since that is what upstream provides.
+  * Now using Standards-Version 3.9.1 (no changes needed).
+  * debian/rules: Remove enable-sis900 as it's now the default.
+  * debian/patches/50_initrd.patch: New patch to add ramdisk support for d-i.
+  * debian/control: Remove Neal and Jeff from Uploaders (Closes: #565164).
+
+  [ Guillem Jover ]
+  * Use any-i386 in binary package Architecture fields.
+  * Update Vcs fields to point to the new git repositories.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 31 Jul 2010 17:35:20 +0200
+
+gnumach (2:1.3.99.dfsg.git20091128-1) unstable; urgency=low
+
+  * New upstream git snapshot.
+
+  [ Guillem Jover ]
+  * Update debian/copyright to point to the git repository.
+  * Sync with upstream:
+    - debian/patches/05_halt_on_panic_flag.patch: Remove, merged upstream.
+    - debian/patches/12_sis900.patch: Likewise.
+    - debian/patches/14_alloc_params.patch: Likewise.
+    - debian/patches/15_mem_obj_proxy.patch: Likewise.
+    - debian/patches/16_ide_multsect.patch: Likewise.
+    - debian/patches/20_xmm_support.patch: Likewise.
+  * Switch to source format “3.0 (quilt)”:
+    - Remove quilt from Build-Depends.
+    - Remove quilt.make include from debian/rules.
+    - Remove patch and unpatch targets from debian/rules.
+    - Remove now unneeded debian/README.source.
+  * Do not include ChangeLog.0*, they are not shipped upstream anymore.
+  * Remove Marcus Brinkmann from Uploaders. Closes: #503568
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 28 Nov 2009 19:14:15 +0100
+
+gnumach (2:1.3.99.dfsg.cvs20090220-2) unstable; urgency=low
+
+  [ Guillem Jover ]
+  * Change gnumach-dbg section to debug.
+  * Change source and gnumach section to kernel.
+  * Now using Standards-Version 3.8.3.
+
+  [ Samuel Thibault ]
+  * debian/patches/14_alloc_params.patch: reserve 128MiB for virtual memory
+    space.  Fixes boot with more than ~900MiB.
+  * debian/patches/20_mmx_support.patch: rename to 20_xmm_support.patch and
+    fix comment: the added support is XMM registers, not MMX.
+  * debian/control: Add myself as uploader.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 08 Jun 2009 22:23:13 +0200
+
+gnumach (2:1.3.99.dfsg.cvs20090220-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Do not panic in fpintr if we receive the interrupt twice in the same
+      thread. (Closes: #447036)
+
+  [ Samuel Thibault ]
+  * Remove kern/mach_param.h patch from debian/patches/14_alloc_params.patch,
+    increase zone_map_size and maximum number of cached objects.
+
+  [ Guillem Jover ]
+  * Switch to debhelper compatibility level 7.
+  * Use dh_prep instead of “dh_clean -k”.
+  * Remove XC- prefix from Package-Type field.
+  * Sync with upstream:
+    - debian/patches/00_clean_gfdl.patch: Refresh.
+    - debian/patches/05_halt_on_panic_flag.patch: Likewise.
+    - debian/patches/14_alloc_params.patch: Likewise.
+    - debian/patches/15_mem_obj_proxy.patch: Likewise.
+    - debian/patches/20_mmx_support.patch: Likewise.
+
+ -- Guillem Jover <guillem@debian.org>  Fri, 20 Feb 2009 03:27:59 +0200
+
+gnumach (2:1.3.99.dfsg.cvs20080708-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Fix zalloc alignment support, and thus alignment of FPU save area.
+      (Closes: #440068)
+    - Enable multicast for IPv6.
+    - Enable Bus Mastering on triton chipsets.
+    - Fix gcc-4.3 non-inlining. (Closes: #474902)
+    - Fix direction flag on syscall entry. (Closes: #469566)
+    - Fix initialization of RTL8139. (Closes: #469566)
+
+  [ Samuel Thibault ]
+  * Append more agressive caching parameter to
+    debian/patches/14_alloc_params.patch.
+  * New patch to enable IDE multiple sector I/O when the drive can do it.
+    - debian/patches/16_ide_multsect.patch
+  * Clean debian/tmp-dbg.
+
+  [ Guillem Jover ]
+  * Add Homepage field.
+  * Add Vcs-Browser and Vcs-Svn fields.
+  * Remove repository information from debian/copyright as it is now on
+    debian/control.
+  * Refer to GPL-2 from common-licenses instead of just GPL.
+  * Add a README.source.
+  * Now using Standards-Version 3.8.0.
+  * Refresh patches with -pab.
+  * Remove DPATCHLEVEL variable from patches.
+  * Change source and binary packages from Section base to admin.
+  * Mangle the Debian version in the watch file.
+  * Sync with upstream:
+    - debian/patches/00_clean_gfdl.patch: Refresh.
+    - debian/patches/05_halt_on_panic_flag.patch: Likewise.
+    - debian/patches/13_ide_dma.patch: Likewise.
+    - debian/patches/14_alloc_params.patch: Likewise.
+  * Use $(filter ...) instead of $(findstring ...) to extract space separated
+    options from DEB_BUILD_OPTIONS in debian/rules.
+  * Merge check targets into build targets.
+  * Clean up debian/rules:
+    - Run autoreconf on-demand, which fixes a FTBFS when built twice in a
+      row. (Closes: #424353)
+    - Support parallel builds by moving 'patch' dependency from
+      the build to a new pre-patch-* targets that serializes configuration.
+  * Properly clean up autogenerated cruft.
+  * Add Build-Depends on autoconf and automake now that we call autoreconf at
+    build time.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 08 Jul 2008 16:54:06 +0300
+
+gnumach (2:1.3.99.dfsg.cvs20070809-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+  * Add an autoregen target to ease regenerating the autoconf patch.
+  * Use binary:Version instead of the deprecated Source-Version substvar.
+  * Do not use configure file stamps, use config.status instead.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 09 Aug 2007 01:45:22 +0300
+
+gnumach (2:1.3.99.dfsg.cvs20070526-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/41_io_unlock_ioremove.patch: Removed, fixed upstream.
+    - debian/patches/42_disable_ioperm.patch: Likewise.
+    - debian/patches/43_debvice_port_fix.patch: Likewise.
+    - debian/patches/44_more_ports.patch: Likewise.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/46_io_device.patch: Likewise.
+    - debian/patches/20_mmx_support.patch: Sync.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+  * Temporarily restore support for memory mapping through the iopl device,
+    so that stuff like X can work again. (Closes: #421135)
+    - debian/patches/40_iopl_mmap.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@labri.fr>.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 26 May 2007 10:01:54 +0300
+
+gnumach (2:1.3.99.dfsg.cvs20070405-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/44_more_ports.patch: Sync.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/05_halt_on_panic_flag.patch
+    - debian/patches/12_sis900.patch: Unfuzzy.
+    - debian/patches/13_ide_dma.patch: Likewise.
+    - debian/patches/14_alloc_params.patch: Likewise.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/46_io_device.patch: Likewise.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 05 Apr 2007 07:33:38 +0300
+
+gnumach (2:1.3.99.dfsg.cvs20070306-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Protect the net filter code from being interrupted.
+      (Closes: #396741, #413185)
+      Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+    - debian/patches/00_clean_gfdl.patch: Sync.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+  * Fixed MMX register support. (Closes: #413177)
+    - debian/patches/20_mmx_support.patch: Updated.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Run the test suite after build. (Closes: #390872)
+
+ -- Guillem Jover <guillem@debian.org>  Tue,  6 Mar 2007 07:51:30 +0200
+
+gnumach (2:1.3.99.dfsg.cvs20070211-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/22_scsi_inf_loop.patch: Removed, merged upstream.
+    - debian/patches/47_pcmcia_isa.patch: Likewise.
+    - debian/patches/10_cdromlock.patch: Sync.
+    - debian/patches/12_sis900.patch: Likewise.
+    - debian/patches/15_mem_obj_proxy.patch: Likewise.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+  * Add MMX register support.
+    - debian/patches/20_mmx_support.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Sun, 11 Feb 2007 16:11:00 +0200
+
+gnumach (2:1.3.99.dfsg.1-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/01_gcc-4.1.patch: Removed, merged upstream.
+    - debian/patches/00_clean_gfdl.patch: Sync.
+    - debian/patches/05_halt_on_panic_flag.patch: Likewise.
+    - debian/patches/10_cdromlock.patch: Likewise.
+    - debian/patches/12_sis900.patch: Likewise.
+    - debian/patches/13_ide_dma.patch: Likewise.
+    - debian/patches/14_alloc_params.patch: Likewise.
+    - debian/patches/15_mem_obj_proxy.patch: Likewise.
+    - debian/patches/41_io_unlock_ioremove.patch: Likewise.
+    - debian/patches/42_disable_ioperm.patch: Likewise.
+    - debian/patches/43_debvice_port_fix.patch: Likewise.
+    - debian/patches/44_more_ports.patch: Likewise.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/46_io_device.patch: Likewise.
+    - debian/patches/47_pcmcia_isa.patch: Disabled, merged upstream.
+    - debian/patches/90_autoconf_autogen.patch: Regenerated.
+    - debian/patches/61_vm_resident-zoned.patch: Disable for now, it's
+      causing problems with current applied patches in CVS.
+  * Adapt to the new automakified build system:
+    - New D and D_DBG variables pointing to the package destination dirs.
+    - Remove debian/rules.options, now unneeded with the default configure
+      options, except for '--enable-sis900' which is not enabled by default.
+    - Pass --prefix and --exec-prefix to configure.
+    - Use DESTDIR instead of passing the prefix and exec_prefix variables.
+    - Call install instead of install-kernel and install-headers for the
+      default build.
+    - Call install-exec instead of install-kernel for the -dbg build.
+    - Use dh_install to install files from D and D_DBG into the proper
+      package dirs.
+    - debian/gnumach-dbg.install: New file.
+    - debian/gnumach-dev.install: Likewise.
+    - debian/gnumach-udeb.install: Likewise.
+    - debian/gnumach.install: Likewise. Install the msgids. (Closes: #365828)
+  * Completely removed the doc/ directory.
+    - Document the removal of the non-free GFDL manual in debian/copyright.
+    - Do not try to build the now non-existent doc/ directory.
+    - Disable dh_installinfo.
+  * Cleanup debian/rules file:
+    - Remove the manual cruft-removal line from the clean target.
+    - Remove the stamp file for the -dbg build.
+    - Merge the install-gnumach-dbg and install-gnumach targets into install.
+
+ -- Guillem Jover <guillem@debian.org>  Tue, 14 Nov 2006 05:11:48 +0200
+
+gnumach (1:20060826.dfsg.1-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Disable wavelan driver as it does not build anymore with the updated
+      Linux header files.
+    - Make gnumach-dbg Depend on gnumach with the exact same version, due
+      to an interface change in the networking code, to drag it as well.
+    - debian/patches/05_halt_on_panic_flag.patch: Sync.
+    - debian/patches/10_cdromlock.patch: Likewise.
+    - debian/patches/12_sis900.patch: Likewise.
+    - debian/patches/13_ide_dma.patch: Likewise.
+    - debian/patches/61_vm_resident-zoned.patch: Likewise.
+    - debian/patches/90_autoconf_autogen.patch: Likewise.
+    - debian/patches/23_ps2_mouse.patch: Removed, integrated upstream.
+    - debian/patches/50_mem_limit.patch: Likewise.
+  * Switch to quilt:
+    - debian/control: Add quilt (>= 0.40) to Build-Depends.
+    - debian/patches/series: New file.
+    - debian/patch.mk: Removed.
+    - debian/rules: Include '/usr/share/quilt/quilt.make' instead of
+      'debian/patch.mk'. Change clean to a single colon target and make it
+      depend on patch.
+  * Now using Standards-Version 3.7.2 (no changes needed).
+  * Fix an unused field optimization with gcc 4.1 which was causing the
+    descriptor initialization to do it partially.
+    - debian/patches/01_gcc-4.1.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Enable PCMCIA ISA support.
+    - debian/patches/47_pcmcia_isa.patch: New file.
+    Thanks to Stefan Siegl <stesie@brokenpipe.de>.
+  * Enable all PCMCIA options.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 31 Aug 2006 04:43:57 +0300
+
+gnumach (1:20060408.dfsg.1-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Fix I/O problem with Hurd console and X.
+
+ -- Guillem Jover <guillem@debian.org>  Sat,  8 Apr 2006 19:35:22 +0300
+
+gnumach (1:20060402.dfsg.1-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - Remove GFDL license and the manual licensed with it.
+    - debian/patches/00_clean_gfdl.patch: Do not build the manual.
+    - debian/patches/11_nic_update.patch: Removed, integrated upstream.
+    - debian/patches/16_net_apricot_stack_of.patch: Likewise.
+    - debian/patches/17_net_gcc_4.0.patch: Likewise.
+    - debian/patches/20_ide_disable_irqs.patch: Likewise.
+    - debian/patches/21_pata_off_by_one_irq.patch: Likewise.
+    - debian/patches/31_tls_ldt.patch: Likewise.
+    - debian/patches/40_user-tss.patch: Likewise.
+    - debian/patches/00_build_make_beta.patch: Removed, fixed upstream
+    - debian/patches/12_sis900.patch: Sync.
+    - debian/patches/13_ide_dma.patch: Likewise.
+    - debian/patches/15_mem_obj_proxy.patch: Likewise.
+    - debian/patches/41_io_unlock_ioremove.patch: Likewise.
+    - debian/patches/42_disable_ioperm.patch: Likewise.
+    - debian/patches/44_more_ports.patch: Likewise.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/46_io_device.patch: Likewise.
+    - debian/patches/50_mem_limit.patch: Likewise.
+    - debian/patches/90_autoconf_autogen.patch: Likewise.
+  * Fix -H kernel command line argument to halt on panic. (Closes: #184624)
+    - debian/patches/05_halt_on_panic_flag.patch: New file.
+    Thanks to Soeren D. Schulze <soeren.d.schulze@gmx.de>.
+  * Do not allow PCI IRQ's higher than 16.
+    - debian/patches/patches/24_pci_irq_fix.patch: New file.
+    Thanks to Gianluca Guida <glguida@gmail.com>.
+  * Make the Linux device drivers use dynamic memory allocation via the
+    glue code.
+    - debian/patches/61_vm_resident-zoned.patch: New file.
+    Thanks to Gianluca Guida <glguida@gmail.com>.
+  * Build with -fno-strict-aliasing.
+  * Remove Build-Depend on the new POSIX compliant make, it should work on
+    old versions as well now.
+  * Remove the no longer needed texinfo Buil-Depends, and comment out the
+    mach.info from debian/gnumach.info.
+
+ -- Guillem Jover <guillem@debian.org>  Sun,  2 Apr 2006 17:30:25 +0300
+
+gnumach (1:20050801-4) unstable; urgency=low
+
+  * Actually enable the io access disabling patch.
+    - debian/patches/42_disable_ioperm.disabled: Rename to ...
+    - debian/patches/42_disable_ioperm.patch: ... this.
+  * Check for correct return code from pcibios in de4x5 SCSI driver, which
+    was making it loop infinitely if probed.
+    - debian/patches/22_scsi_inf_loop.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Fix PS2 mouse command drivers reception, affecting among others its
+    correct detection.
+    - debian/patches/23_ps2_mouse.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Build-Depend on the new POSIX compliant make.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 16 Jan 2006 05:40:33 +0200
+
+gnumach (1:20050801-3) unstable; urgency=low
+
+  * Fix build failure with latest make 3.81 beta and the new POSIX behaviour
+    related to new line vs shell command.
+    - debian/patches/00_build_make_beta.patch: New file.
+    Thanks to Alfred M. Szmidt <ams@gnu.org>.
+  * Added ChangeLog entries.
+    - debian/patches/13_ide_dma.patch: Modify
+    - debian/patches/14_alloc_params.patch: Likewise.
+  * Fix io port access. (Closes: #46709)
+    - debian/patches/40_user-tss.patch: New file.
+    - debian/patches/41_io_unlock_ioremove.patch: Likewise.
+    - debian/patches/42_disable_ioperm.disabled: Likewise.
+    - debian/patches/43_debvice_port_fix.patch: Likewise.
+    - debian/patches/44_more_ports.patch: Likewise.
+    - debian/patches/45_io_per_task.patch: Likewise.
+    - debian/patches/46_io_device.patch: Likewise.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Fix memory limit, that was causing panics when having roughly more than
+    768 MiB of physical memory. (Closes: #226609)
+    - debian/patches/50_mem_limit.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 12 Jan 2006 00:54:05 +0200
+
+gnumach (1:20050801-2) unstable; urgency=low
+
+  * Added a watch file.
+  * Fix segmentation fault on boot. The apricot net driver was trashing the
+    stack when reading the MAC address from the io port. (Closes: #340389)
+    - debian/patches/16_net_apricot_stack_of.patch: New file.
+    Thanks to Sergio Lopez  <koro@sinrega.org>.
+  * Fix invalid lvalue errors with gcc-4.0 in ne2k-pci driver.
+    - debian/patches/11_nic_update.patch: Split into ...
+    - debian/pacthes/17_net_gcc_4.0.patch: ... here.
+    Thanks to Thomas Schwinge <tschwinge@gnu.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 28 Nov 2005 03:46:36 +0200
+
+gnumach (1:20050801-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/00_autoconf_update.patch: Remove, integrated upstream.
+    - debian/patches/11_nic_update.patch: Rediff.
+    - debian/patches/90_autoconf_autogen.patch: Regenerate.
+  * No need to rename Drivers.in to configure.ac anymore.
+  * Add DPATCHLEVEL and ChangeLog entry.
+    - debian/patches/12_sis900.patch: Update.
+  * Disable IDE interrupts when the driver requests that through
+    request_irq().
+    - debian/patches/20_ide_disable_irqs.patch: New file.
+    Thanks to Samuel Thibault <samuel.thibault@ens-lyon.org>.
+  * Fix an off-by-one bug in the PATA probe function.
+    - debian/patches/21_pata_off_by_one_irq.patch: New file.
+    Thanks to Sergio Lopez <koro@sinrega.org>.
+  * Set correct values for %gs and %fs when entering kernel mode. Make sure
+    to always copy the master LDT when the user does not have a modified one.
+    - debian/patches/31_tls_ldt.patch: New file.
+    Thanks to Jeroen Dekkers <jeroen@dekkers.cx>.
+  * Now using Standards-Version 3.6.2 (no changes needed).
+  * Wrap lines in debian/control fields (knowingly breaking policy).
+  * Upgrade to debhelper compat version 5.
+  * Update FSF's address.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 10 Nov 2005 06:01:36 +0200
+
+gnumach (1:20050501-4) unstable; urgency=low
+
+  * Add proxy memory objets.
+    - debian/patches/15_mem_obj_proxy.patch.
+    Thanks to Marcus Brinkmann <marcus@gnu.org>.
+
+ -- Guillem Jover <guillem@debian.org>  Wed,  8 Jun 2005 02:01:42 +0300
+
+gnumach (1:20050501-3) unstable; urgency=low
+
+  * Provide a udeb package.
+    - Depend on debhelper >= 4.2.
+  * Cleaned debian/rules:
+    - Merge install-gnumach-dev target with install-gnumach.
+    - Add PHONY targets.
+    - Remove unused all target.
+
+ -- Guillem Jover <guillem@debian.org>  Thu,  2 Jun 2005 22:14:40 +0300
+
+gnumach (1:20050501-2) unstable; urgency=low
+
+  * Add a system stabilizer patch.
+    - debian/patches/14_alloc_params.patch.
+    Thanks to Neal H. Walfield <neal@cs.uml.edu>.
+  * Reverse the meaning of --enable-ide-forcedma.
+    - debian/patches/13_ide_dma.patch.
+    Thanks to Sergio López <koro@menteslibres.org> for noticing.
+
+ -- Guillem Jover <guillem@debian.org>  Sat, 14 May 2005 20:42:29 +0300
+
+gnumach (1:20050501-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+    - debian/patches/12_fixes_gcc-3.4.patch: Remove upstream integrated patch.
+    - debian/patches/14_disable_fpe.patch: Likewise.
+    - debian/patches/15_disable_qlogic_firmware.patch: Likewise.
+    - debian/patches/16_enable_debug.patch: Likewise.
+    - debian/patches/17_fix_double_free.patch: Likewise.
+    - debian/patches/18_linux_printk_buffer_overrun.patch: Likewise.
+    - debian/patches/19_cpu_detect.patch: Likewise.
+    - debian/patches/20_glue_block_assert.patch: Likewise.
+    - debian/patches/10_cdromlock.patch: Rediff.
+    - debian/patches/90_autoconf_autogen.patch: Regenerate.
+  * Add support for SiS 900 NIC.
+    - debian/patches/12_sis900.patch: New file.
+    Thanks to Andreas B. Mundt <andi.mundt@web.de>.
+  * Move configure drivers list to debian/rules.options.
+
+ -- Guillem Jover <guillem@debian.org>  Sun,  1 May 2005 20:29:08 +0300
+
+gnumach (1:20040915.dfsg.1-2) unstable; urgency=low
+
+  * Fix a typo in natsemi driver enable command. (Closes: #293950)
+    Thanks to Regis Boudin <regis.boudin@gmail.com>.
+  * Sync patches with latest ones sent to upstream.
+  * Remove leftover assert on the block glue code.
+  * Fix Subversion repository address.
+
+ -- Guillem Jover <guillem@debian.org>  Thu, 10 Feb 2005 06:19:15 +0100
+
+gnumach (1:20040915.dfsg.1-1) unstable; urgency=low
+
+  * Repackage upstream source to remove binary only data. (Closes: #252323)
+    - i386/i386/fpe.b: Remove binary without source.
+    - i386/i386/fpe.b_elf: Likewise.
+    - linux/src/drivers/scsi/qlogicisp_asm.c: Likewise.
+  * Disable floating point emulation usage.
+  * Disable qlogicisp firmware loading.
+  * Change "ifdef DEBUG" to "ifndef NDEBUG" for asserts and other low
+    footprint debugging stuff, so building with asserts enabled by default.
+  * Fix double free and memory loss probing partition table.
+    Thanks to Neal H. Walfield <neal@cs.uml.edu>.
+  * Fix possible buffer overrun on linux printk.
+    Thanks to Neal H. Walfield <neal@cs.uml.edu>.
+  * Fix cpu detection code.
+  * Do not use stamp files for build targets.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 22 Nov 2004 04:50:50 +0100
+
+gnumach (1:20040915-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+  * Changed Maintainer address.
+  * Added former implicit maintainers to Uploaders.
+  * Added myself to Uploaders.
+  * Cleaned and updated debian/copyright file.
+  * Honour DEB_BUILD_OPTIONS.
+  * Split patches into debian/patches/.
+  * Allow to build natively on non GNU/Hurd systems.
+  * Enable i386, kfreebsd-i386 and knetbsd-i386 on all packages.
+  * Move gnumach-dev to binary-arch in debian/rules.
+  * Switched to debhelper.
+  * Now using Standards-Version 3.6.1.
+  * Update autoconf.
+    Based on a patch by Neal H. Walfield <neal@cs.uml.edu>, thanks.
+  * Update NICs from Linux.
+    Thanks to Alfred M. Szmidt <ams@kemisten.nu> and
+    Arief M. Utama <arief_mulya@yahoo.com>.
+  * Add newer IDE DMA support.
+    Thanks to Sergio López <koro@menteslibres.org>.
+  * Fix build failures for gcc-3.4.
+
+ -- Guillem Jover <guillem@debian.org>  Mon, 25 Oct 2004 09:53:30 +0200
+
+gnumach (1:20040229-1) unstable; urgency=low
+
+  * Update to CVS 20040229.
+  * debian/control: Add texinfo to build dependencies.
+  * debian/control: Add myself as uploader.
+  * Patches applied to CVS code: cdromlock.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun, 29 Feb 2004 21:43:12 +0200
+
+gnumach (1:20020421-1) unstable; urgency=low
+
+  * Update to CVS 20020421.
+  * Patches applied to CVS code: cdromlock.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun, 21 Apr 2002 18:53:13 +0200
+
+gnumach (1:20011013-1) unstable; urgency=low
+
+  * Update to CVS 20011013.
+  * Patches applied to CVS code: cdromlock.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat, 13 Oct 2001 00:21:15 +0200
+
+gnumach (1:20011005-2) unstable; urgency=low
+
+  * Update to CVS 20011005.
+  * Patches applied to CVS code: cdromlock.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Fri,  5 Oct 2001 21:14:51 +0200
+
+gnumach (1:20010918-1) unstable; urgency=low
+
+  * Update to CVS 2001918.
+  * Patches applied to CVS code: cdromlock.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Tue, 18 Sep 2001 23:15:17 +0200
+
+gnumach (1:20010818-1) unstable; urgency=low
+
+  * Update to CVS 20010718.
+  * Patches applied to CVS code: cdromlock.
+  The other patches are in CVS now.
+
+  * Wading through the bug list, there are some old bugs
+  fixed long ago, closes: #37954, #47948, #85302, #45792
+  * debian/rules: Make it build via direct invocation, submitted
+  by Robert Bihlmeyer, closes: #101697.
+  
+  * control: New package gnumach-dbg.  This kernel is not stripped and includes the
+  kernel-level debugger.
+  * debian/rules: Build this package.
+
+ -- Marcus Brinkmann <brinkmd@debian.de>  Sat, 18 Aug 2001 02:15:06 +0200
+
+gnumach (1:20010718-1) unstable; urgency=low
+
+  * Update to CVS 20010718.
+  * Patches applied to CVS code: cdromlock, color, kbd_enqueu.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Wed, 18 Jul 2001 22:10:20 +0200
+
+gnumach (1:1.2-11) unstable; urgency=low
+
+  * debian/rules (stamp-configure): Add ncr53c8xx driver.
+  * Update to CVS 20010528.
+  * Patches applied to CVS code: cdromlock, color, kbd_enqueu.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun, 27 May 2001 14:14:12 +0200
+
+gnumach (1:1.2-10) unstable; urgency=low
+
+  * debian/rules (stamp-configure): Disable eatadma driver, which
+  prevents booting on some AMD K7 motherboards. Reported by
+  Robert Bihlmeyer <robbe@orcus.priv.at>.
+  * Update to CVS 20010429, which contains support for high baud rates
+  (B57600, B115200).
+  * Patches applied to CVS code: cdromlock, color, kbd_enqueu.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun, 29 Apr 2001 21:41:34 +0200
+
+gnumach (1:1.2-9) unstable; urgency=low
+
+  * Update to CVS 20010111, which contains a new interface for
+  block devices with a large number of blocks.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Thu, 11 Jan 2001 23:45:49 +0100
+
+gnumach (1:1.2-8) unstable; urgency=low
+
+  * Applied patch by Alexey Dejneka <adejneka@comail.ru> to fix CD ROM
+  locking problem.
+  * debian/control: Add mig and sharutils to list of build dependencies
+  (sharutils for uudecode for fpu emu), closes: #74794.
+  * linux/src/drivers/net/tulip.c: Update from Linux 2.2.17, thanks
+  Jason Henry Parker <jasonp@uq.net.au>
+  
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun, 26 Nov 2000 03:46:08 +0100
+
+gnumach (1:1.2-7) unstable; urgency=low
+
+  * Update to CVS 20000929, which contains a fix for comX.
+  * debian/rules: Drop --enable-lpr, which doesn't work.
+  Drop --enable-com, which is already enforced.
+  
+ -- Marcus Brinkmann <brinkmd@debian.org>  Fri, 29 Sep 2000 20:24:54 +0200
+
+gnumach (1:1.2-5) unstable; urgency=low
+
+  * Update to CVS 20000817, which contains a fix for
+  linux/dev/glue/block.c.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Thu, 17 Aug 2000 03:22:30 +0200
+
+gnumach (1:1.2-4) unstable; urgency=low
+
+  * Add color support to gnumach. Set TERM to mach-color to get the full
+  effect. Thanks to Juli-Manel Merino Vidal <jmmv@mail.com> for working
+  out the mapping between ANSI color codes and the bits to poke into the
+  attribute.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Tue,  8 Aug 2000 21:00:50 +0200
+
+gnumach (1:1.2-3) unstable; urgency=low
+
+  * Snapshot from CVS 20000703.
+  * i386/i386at/kd.c: Receive 0xE0 scan codes (patch by Kalle Olavi Niemitalo).
+  * Patch to get it compile with gcc-2.95.1 or newer
+  ( by "Weil, Stefan 3732 EPE-24" <Stefan.Weil@de.heidelberg.com>
+  and Igor Khavkine <i_khavki@alcor.concordia.ca>)
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Mon,  3 Jul 2000 21:05:42 +0200
+
+gnumach (1:1.2-2) unstable; urgency=low
+
+  * Snapshot from CVS 19990907.
+  * Reenable all network interfaces, because the problem is fixed.
+  * Gzip gnumach binary.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Wed,  8 Sep 1999 00:15:39 +0200
+
+gnumach (1:1.2-1) unstable; urgency=low
+
+  * Snapshot from CVS 19990725.
+  * Start from official 1.2 release.
+  * Remove some network card drivers that seems to have no autodetection in
+    order to get a maximum set of cards enabled that allows GNU Mach to detect
+    at least one.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Mon, 26 Jul 1999 01:31:31 +0200
+
+gnumach (1:1.1.92-5) unstable; urgency=low
+
+  * Snapshot from CVS 19990616.
+  * Marks dummy network driver still there.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Thu, 17 Jun 1999 16:53:50 +0200
+
+gnumach (1:1.1.92-4) unstable; urgency=low
+
+  * Snapshot from CVS 19990602.
+  * Marks dummy network driver still there.
+  * Replaced linux/dev/drivers/block/genhd.c to avoid a bug.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat,  5 Jun 1999 00:59:43 +0200
+
+gnumach (1:1.1.92-2) unstable; urgency=low
+
+  * Snapshot from CVS 19990524.
+  * Applied Marks dummy network driver.
+  * Enabled thousands more devices.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Mon, 24 May 1999 18:00:19 +0200
+
+gnumach (1:1.1.92-1) unstable; urgency=low
+
+  * Snapshot from CVS 19990507.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Fri,  7 May 1999 20:46:06 +0200
+
+gnumach (1:1.1.90-2) unstable; urgency=low
+
+  * Fix package administration information to reflect that maintainership
+    has been transferred to bug-hurd@gnu.org.
+  * Merge a few configuration fixes from Marcus Brinkmann.
+  * Install include files into /usr/include, for the benefit of people
+    without the /usr symlink.
+
+ -- Gordon Matzigkeit <bug-hurd@gnu.org>  Wed, 17 Feb 1999 16:50:54 -0600
+
+gnumach (1:1.1.90-1) unstable; urgency=low
+
+  * New version from OKUJI Yoshinori.
+  * Use DEB_{BUILD,HOST}_GNU_TYPE, in accordance with Marcus's new
+    cross-build proposal.
+
+ -- Gordon Matzigkeit <gord@debian.org>  Tue, 11 Feb 1999 22:14:01 -0600
+
+gnumach (19990116-1) unstable; urgency=low
+
+  * New version from OKUJI Yoshinori.
+  * Added kmsg.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Mon, 18 Jan 1999 17:11:58 +0100
+
+gnumach (19981118-2) unstable; urgency=low
+
+  * Split into gnumach and gnumach-dev.
+  * Added keyboard patch by Tudor Hulubei <tudor@cs.unh.edu> to fix some
+    keybord issues.
+  * Bumped Standards: version to 2.5.0.0.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sun,  3 Jan 1999 13:53:28 +0100
+
+gnumach (19981118-1) unstable; urgency=low
+
+  * New version from OKUJI Yoshinori  <okuji@kuicr.kyoto-u.ac.jp>.
+    This is not a new upstream version, but includes the Linux 2.0.36 driver.
+  * Strip the kernel.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat, 19 Dec 1998 05:27:30 +0100
+
+gnumach (19981025-1) unstable; urgency=low
+
+  * New upstream snapshot.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat,  7 Nov 1998 18:56:53 +0100
+
+gnumach (1.1.3-2) unstable; urgency=low
+
+  * Added CPU_TYPE_{I486,PENTIUM,PENTIUMPRO,POWERPC} to
+    ./include/mach/machine.h. This is needed for latest hurd release.
+  * Changed description (thank you, Santiagio).
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat,  1 Aug 1998 21:33:31 +0200
+
+gnumach (1.1.3-1) unstable; urgency=low
+
+  * Initial Version.
+
+ -- Marcus Brinkmann <brinkmd@debian.org>  Sat,  1 Aug 1998 21:33:31 +0200

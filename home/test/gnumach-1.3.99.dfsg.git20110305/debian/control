@@ -1,0 +1,133 @@
+Source: gnumach
+Section: kernel
+Priority: optional
+Maintainer: GNU Hurd Maintainers <debian-hurd@lists.debian.org>
+Uploaders: Guillem Jover <guillem@debian.org>,
+ Samuel Thibault <sthibault@debian.org>
+Homepage: http://www.gnu.org/software/hurd/microkernel/mach/gnumach.html
+Vcs-Browser: http://git.debian.org/?p=pkg-hurd/gnumach.git
+Vcs-Git: git://git.debian.org/pkg-hurd/gnumach.git
+Build-Depends: debhelper (>= 7), mig, sharutils,
+ autoconf, automake
+Standards-Version: 3.9.1
+
+Package: gnumach
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach-image-1-486
+Breaks: grub-pc (<< 1.98+20100527-1)
+Description: Dummy transition package for gnumach-image-*
+ This is a dummy package to ease the transition to gnumach-image-*
+ package names.  It can be purged safely after upgrade.
+
+Package: gnumach-dbg
+Section: debug
+Priority: extra
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach (= ${binary:Version}), gnumach-image-1.3.99-486-dbg
+Breaks: grub-pc (<< 1.98+20100527-1)
+Description: Dummy transition package for gnumach-image-*-dbg
+ This is a dummy package to ease the transition to gnumach-image-*dbg
+ package names.  It can be purged safely after upgrade.
+
+Package: gnumach-image-1-486
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach-image-1.3.99-486
+Description: The GNU version of the Mach microkernel
+ This package depends on the latest GNU Mach kernel for use on PCs
+ with a 486, Pentium or compatible processor.
+
+Package: gnumach-image-1-xen-486
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach-image-1.3.99-xen-486
+Description: The GNU version of the Mach microkernel
+ This package depends on the latest GNU Mach kernel for use on PCs
+ with a 486, Pentium or compatible processor.
+ .
+ This kernel is for use in unprivileged (domU) Xen domains.
+
+Package: gnumach-image-1.3.99-486
+Architecture: any-i386
+Depends: ${misc:Depends}
+Provides: gnumach-image
+Breaks: libc0.3 (<< 2.10.1-3)
+Description: The GNU version of the Mach microkernel
+ This is the Utah Mach microkernel used by the Hurd.
+
+Package: gnumach-image-1.3.99-xen-486
+Architecture: any-i386
+Depends: ${misc:Depends}
+Provides: gnumach-image
+Breaks: libc0.3 (<< 2.10.1-3)
+Description: The GNU version of the Mach microkernel for Xen
+ This is the Utah Mach microkernel used by the Hurd.
+ .
+ The version in this package is compiled with Xen support.
+
+Package: kernel-image-1.3.99-486-di
+XB-Kernel-Version: 1.3.99-486
+Package-Type: udeb
+Provides: kernel-image, floppy-modules, ide-modules, input-modules, nic-modules, nic-pcmcia-modules, nic-wireless-modules, pcmcia-modules, scsi-modules, serial-modules
+Section: debian-installer
+Architecture: any-i386
+Depends: ${misc:Depends}, hurd-udeb
+Description: The GNU version of the Mach microkernel for the Debian installer
+ This is the Utah Mach microkernel used by the Hurd for the Debian
+ Installer boot images. It does _not_ provide a usable kernel for
+ your full Debian system.
+
+Package: kernel-image-1.3.99-xen-486-di
+XB-Kernel-Version: 1.3.99-xen-486
+Package-Type: udeb
+Provides: kernel-image, input-modules, nic-modules
+Section: debian-installer
+Architecture: any-i386
+Depends: ${misc:Depends}, hurd-udeb
+Description: The GNU version of the Mach microkernel for the Debian installer
+ This is the Utah Mach microkernel used by the Hurd for the Debian
+ Installer boot images. It does _not_ provide a usable kernel for
+ your full Debian system.
+
+Package: gnumach-image-1.3.99-486-dbg
+Section: debug
+Priority: extra
+Provides: gnumach
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach-image-1.3.99-486 (= ${binary:Version})
+Description: The GNU version of the Mach microkernel for debugging
+ This is the Utah Mach microkernel used by the Hurd.
+ .
+ The version in this package is identical to the version found in the
+ gnumach package, except that it is not stripped and has the
+ kernel-level debugger compiled in.
+
+Package: gnumach-image-1.3.99-xen-486-dbg
+Section: debug
+Priority: extra
+Provides: gnumach
+Architecture: any-i386
+Depends: ${misc:Depends}, gnumach-image-1.3.99-xen-486 (= ${binary:Version})
+Description: The GNU version of the Mach microkernel for Xen for debugging
+ This is the Utah Mach microkernel used by the Hurd.
+ .
+ The version in this package is identical to the version found in the
+ gnumach-xen package, except that it is not stripped and has the
+ kernel-level debugger compiled in.
+
+Package: gnumach-common
+Section: devel
+Architecture: all
+Depends: ${misc:Depends}
+Replaces: gnumach (<< 2:1.3.99.dfsg.git20110227-1)
+Breaks: gnumach (<< 2:1.3.99.dfsg.git20110227-1)
+Description: The GNU version of the Mach microkernel, common files.
+ These are common files along the Utah Mach microkernel used by the Hurd.
+ .
+ It notably provides useful messages IDs for rpctrace.
+
+Package: gnumach-dev
+Section: devel
+Architecture: any-i386
+Depends: ${misc:Depends}
+Description: The GNU version of the Mach microkernel
+ These are the header files for the Utah Mach microkernel used by the Hurd.
+

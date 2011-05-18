@@ -1,0 +1,20 @@
+The mem device provides direct memory access (needed e.g. for Xorg), but
+some packages (Xorg, notably) are still using the iopl device.  TODO:
+drop this patch when xserver-xorg >= 1.9.99.1 enters unstable (and break
+previous versions).
+
+diff --git a/i386/i386at/conf.c b/i386/i386at/conf.c
+index d51b5ee..88e753c 100644
+--- a/i386/i386at/conf.c
++++ b/i386/i386at/conf.c
+@@ -135,6 +135,10 @@ struct dev_ops	dev_name_list[] =
+ 	  nodev,	nodev,		nodev,		memmmap,
+ 	  nodev,	nulldev,	nulldev,	0,
+ 	  nodev },
++	{ "iopl",	nulldev,	nulldev,	nodev,
++	  nodev,	nodev,		nodev,		memmmap,
++	  nodev,	nulldev,	nulldev,	0,
++	  nodev },
+ #endif	/* MACH_HYP */
+ 
+ #ifdef	MACH_KMSG
