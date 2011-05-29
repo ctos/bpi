@@ -23,6 +23,8 @@ int saveCookie(char url[], char cookie[]);
 void getCookieName(char cookie[], char cookie_name[]);
 int  checkCookieName(char url[], char cookie_name[]);
 void  deleteCookie(char url[], char cookie_name[]);
+int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
+
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -402,5 +404,61 @@ void deleteCookie(char url[], char cookie_name[])
 	remove(url);
 	rename(temp_file_name, url);
 	fclose(fp);
+}
+int  getSegmentData(char cookie[], char cookie_name[], char segment_name[], char data[])
+{
+		
+		char temp_name[1024];
+		getCookieName(cookie, temp_name);
+		printf("temp_name:%s.\n", temp_name);
+		printf("cookie_name:%s.\n", cookie_name);
+		if (strcmp(temp_name, cookie_name) != 0)
+		{
+			data[0] = 0;
+			return 0;
+		}
+		
+		int i = 0;
+		while (cookie[i] != 0)
+		{
+			int flag = 0;
+			char temp_segment_name[1024];
+			int k;
+			int l;
+			
+			for (; cookie[i] != 0 && (cookie[i] == ' ' || cookie[i] == ';'); i++);
+			for (k = 0, l = 0; cookie[i] != 0; i ++)
+			{
+				if (cookie[i] == '=')
+				{
+					flag = 1;
+				}
+				else if (!flag)
+				{
+					temp_segment_name[k] = cookie[i];
+					k++;
+				}
+				else if (flag == 1 && cookie[i] != ';')
+				{
+					data[l] = cookie[i];	
+					l++;
+				}
+
+				else if (cookie[i] == ';')
+				{
+					flag = 2;
+					break;
+				}
+			}
+			temp_segment_name[k] = 0;
+			data[l] = 0;
+			if (strcmp(temp_segment_name, segment_name) == 0)
+			{
+
+				return 1;
+			}
+		}
+		return 0;
+
 }
 //////////////////////////////httpclient.c 结束///////////////////////////////////////////
