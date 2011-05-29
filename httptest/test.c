@@ -12,66 +12,17 @@
 #include <arpa/inet.h>
 #include <ctype.h>
 
+#define SET_COOKIE "Set-Cookie:"
+#define BLOCK_NUM 1024
+#define COOKIE_NAME_NUM 1024
 //////////////////////////////httpclient.c 开始///////////////////////////////////////////
-
-/********************************************
-  功能：搜索字符串右边起的第一个匹配字符
-  ********************************************/
-char * Rstrchr(char * s, char x)   {
-	   int i = strlen(s);
-	   while(s[i-1]) if(strchr(s + (i - 1), x))   return (s + (i - 1));   else i--;
-	   return 0;
-}
-
-/********************************************
-  功能：把字符串转换为全小写
-  ********************************************/
-void ToLowerCase(char * s)   {
-	   while(*s)   *s=tolower(*s++);
-}
-
-/**************************************************************
-  功能：从字符串src中分析出网站地址和端口，并得到用户要下载的文件
-  ***************************************************************/
-void GetHost(char * src, char * web, char * file, int * port)   {
-	char * pA;
-      	char * pB;
-	memset(web, 0, sizeof(web));
-        memset(file, 0, sizeof(file));
-        *port = 0;
-        if(!(*src))   return;
-	pA = src;
-	if(!strncmp(pA, "http://", strlen("http://")))   pA = src+strlen("http://");
-	
-	else if(!strncmp(pA, "https://", strlen("https://")))   pA = src+strlen("https://");			
-	pB = strchr(pA, '/');			 
-	if(pB)   {
-			
-		memcpy(web, pA, strlen(pA) - strlen(pB));
-		
-		if(pB+1)   {
-		
-			memcpy(file, pB + 1, strlen(pB) - 1);
-			
-			file[strlen(pB) - 1] = 0;
-			
-		}
-		
-	}
-	
-	else   memcpy(web, pA, strlen(pA));
-	
-	if(pB)   web[strlen(pA) - strlen(pB)] = 0;
-	
-	else   web[strlen(pA)] = 0;
-	
-	pA = strchr(web, ':');
-	
-	if(pA)   *port = atoi(pA + 1);
-	
-	else *port = 80;
-}
-
+char * Rstrchr(char * s, char x);
+void ToLowerCase(char * s);
+void GetHost(char * src, char * web, char * file, int * port);
+int saveCookie(char url[], char cookie[]);
+void getCookieName(char cookie[], char cookie_name[]);
+int  checkCookieName(char url[], char cookie_name[]);
+void  deleteCookie(char url[], char cookie_name[]);
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -96,7 +47,10 @@ int main(int argc, char *argv[])
 	   int send, totalsend;
 	   int i;
 	   char * pt;
-	
+	   char head_line[1024];
+	   int everyline_number;
+
+
 	   if(argc!=2)
 
 	   {
@@ -171,7 +125,6 @@ int main(int argc, char *argv[])
 		
 		sprintf(request, "GET /%s HTTP/1.1\r\nAccept: */*\r\nAccept-Language: zh-cn\r\n\
 User-Agent: Mozilla/5.0\r\n\
-Cookie: MoodleSession=bdk44rbo0gt825r4svackmmb16; MoodleSessionTest=ZeCW8r0aKC; MOODLEID_=%%25ED%%25C3%%251CC%%25B7d\r\n\
 Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber); 
 	   printf("%s", request);/*准备request，将要发送给主机*/
 	
@@ -188,7 +141,7 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 	   }
 	
 	   else if(host_file && *host_file)   strcpy(local_file, host_file);
-	   else   strcpy(local_file, "index");
+	   else   strcpy(local_file, "index.html");
 	   printf("local filename to write:%s\n\n", local_file);
 
 	
@@ -222,27 +175,48 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 	   printf("\nThe following is the response header:\n");
 																	    
 	   i=0;
-	
+	   everyline_number = 0;	
 
 	
 	   /* 连接成功了，接收http响应，response */
 	
 	   while((nbytes=read(sockfd,buffer,1))==1)
-	
 	   {
 	
 		   if(i < 4)   {
-			   if(buffer[0] == '\r' || buffer[0] == '\n')   i++;
-			   else i = 0;
-			   printf("%c", buffer[0]);/*把http头信息打印在屏幕上*/
+			   if(buffer[0] == '\r' || buffer[0] == '\n')  
+			   {
+				   i++;
+				   head_line[everyline_number] = 0;
+				   everyline_number = 0;
+				   printf("%s\n", head_line);
+				   char *ptr;
+				   if ((ptr = strstr(head_line, SET_COOKIE)) != NULL)
+				   {
+					saveCookie(host_addr, ptr + strlen(SET_COOKIE));
+
+				   
+				   }
+			   }
+			   else 
+			   {
+				   i = 0;
+				   head_line[everyline_number] = buffer[0];
+				   everyline_number ++;
+			   }
 		   }
-		
-		   else   {
-			   fwrite(buffer, 1, 1, fp);/*将http主体信息写入文件*/
-			   i++;
-			   if (i % 1024 == 0) fflush(fp);
+		   else 
+		   {
+			   break;
 		   }
-		
+	   }
+
+
+	   while ((nbytes=read(sockfd,buffer,1))==1)	   
+	   {
+		   fwrite(buffer, 1, 1, fp);/*将http主体信息写入文件*/
+		   i++;
+		   if (i % 1024 == 0) fflush(fp);	   
 	   }
 	
 	   fclose(fp);
@@ -250,5 +224,183 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 	   close(sockfd);
 	
 	   exit(0);
+}
+/********************************************
+  功能：搜索字符串右边起的第一个匹配字符
+  ********************************************/
+char * Rstrchr(char * s, char x)   {
+	   int i = strlen(s);
+	   while(s[i-1]) if(strchr(s + (i - 1), x))   return (s + (i - 1));   else i--;
+	   return 0;
+}
+
+/********************************************
+  功能：把字符串转换为全小写
+  ********************************************/
+void ToLowerCase(char * s)   {
+	   while(*s)   *s=tolower(*s++);
+}
+
+/**************************************************************
+  功能：从字符串src中分析出网站地址和端口，并得到用户要下载的文件
+  ***************************************************************/
+void GetHost(char * src, char * web, char * file, int * port)   {
+	char * pA;
+      	char * pB;
+	memset(web, 0, sizeof(web));
+        memset(file, 0, sizeof(file));
+        *port = 0;
+        if(!(*src))   return;
+	pA = src;
+	if(!strncmp(pA, "http://", strlen("http://")))   pA = src+strlen("http://");
+	
+	else if(!strncmp(pA, "https://", strlen("https://")))   pA = src+strlen("https://");			
+	pB = strchr(pA, '/');			 
+	if(pB)   {
+			
+		memcpy(web, pA, strlen(pA) - strlen(pB));
+		
+		if(pB+1)   {
+		
+			memcpy(file, pB + 1, strlen(pB) - 1);
+			
+			file[strlen(pB) - 1] = 0;
+			
+		}
+		
+	}
+	
+	else   memcpy(web, pA, strlen(pA));
+	
+	if(pB)   web[strlen(pA) - strlen(pB)] = 0;
+	
+	else   web[strlen(pA)] = 0;
+	
+	pA = strchr(web, ':');
+	
+	if(pA)   *port = atoi(pA + 1);
+	
+	else *port = 80;
+}
+
+int saveCookie(char url[], char cookie[])
+{
+	FILE *fp;
+	char file_name[1024];
+	char cookie_information[1024];
+	char cookie_name[1024];
+
+	int i;
+	strcpy(file_name, url);
+
+	
+
+	getCookieName(cookie, cookie_name);
+	if (checkCookieName(file_name, cookie_name))
+	{
+		deleteCookie(url, cookie_name);
+		printf("deleted cookie : %s.\n", cookie_name);
+	}
+
+		
+	fp = fopen(file_name, "a");
+	for (i = 0; cookie[i] != 0; i ++)
+	{
+		fwrite(&cookie[i], 1, 1, fp);		
+	}
+		
+		fwrite("\n", 1, 1, fp);
+
+//	printf("url : %s\n cookie : %s\n", url, cookie);
+	fclose(fp);
+}
+void getCookieName(char cookie[], char cookie_name[])
+{
+	int i, k;
+
+	for (i = 0; cookie[i] == ' '; i ++ )
+	{
+		;
+	}
+	for (k = 0; cookie[i] != '=' && cookie[i] != 0; i ++, k ++)
+	{
+			cookie_name[k] = cookie[i];
+	}
+	cookie_name[k] = 0;
+}
+int checkCookieName(char url[], char cookie_name[])
+{
+	FILE *fp;
+	char file_name[1024];
+	char cookie_information[1024];
+	int already_have_cookie;
+
+	strcpy(file_name, url);
+
+	freopen(file_name, "r", stdin);
+//	printf("in checkCookieName\n");
+
+	already_have_cookie = 0;
+
+	while (fgets(cookie_information, 1024, stdin) != NULL)
+	{
+		char temp[1024];
+		getCookieName(cookie_information, temp);
+		if (strcmp(temp, cookie_name) == 0)
+		{
+			already_have_cookie = 1;		
+			break;
+		}
+//		printf("check : %s\n", temp);
+	}
+	if (already_have_cookie)
+	{
+		printf("already have the cookie\n");
+		return 1;
+	}
+	return 0;
+	
+
+}
+void deleteCookie(char url[], char cookie_name[])
+{
+	FILE *fp = fopen(url, "a+");	
+	FILE *tp;
+	char read_block[BLOCK_NUM];
+	char temp_file_name[] = "temp_del_cookieXXXX";
+
+	if (fp == NULL)
+	{
+		printf("Did not have cookie %s.\n", url);
+	}
+	
+	mkstemp(temp_file_name);
+
+	tp = fopen(temp_file_name, "a+");
+
+	if (tp == NULL)
+	{
+		printf("Can not create temp file.\n");
+	}
+
+	while (fgets(read_block, BLOCK_NUM, fp))
+	{
+		char cookie_name_line[COOKIE_NAME_NUM];
+		getCookieName(read_block, cookie_name_line);
+		
+		printf("read_block:%s.\n", read_block);
+		printf("cookie_name :%s.\n", cookie_name);
+		printf("cookie_name_line :%s.\n", cookie_name_line);
+
+		if (strcmp(cookie_name, cookie_name_line) != 0)
+		{
+			printf("fputs : %s.\n", read_block);
+			fputs(read_block, tp);
+		}
+	}
+	
+	remove(url);
+	rename(temp_file_name, url);
+	fclose(fp);
 }
 //////////////////////////////httpclient.c 结束///////////////////////////////////////////
