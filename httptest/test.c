@@ -21,7 +21,7 @@ void ToLowerCase(char * s);
 void GetHost(char * src, char * web, char * file, int * port);
 int saveCookie(char url[], char cookie[]);
 void getCookieName(char cookie[], char cookie_name[]);
-int  checkCookieName(char url[], char cookie_name[]);
+int  checkCookieName(char url[], char cookie_name[], char path[]);
 void  deleteCookie(char url[], char cookie_name[]);
 int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
 
@@ -292,14 +292,15 @@ int saveCookie(char url[], char cookie[])
 	char file_name[1024];
 	char cookie_information[1024];
 	char cookie_name[1024];
-
+	char path[1024];
 	int i;
 	strcpy(file_name, url);
 
 
-
+	
 	getCookieName(cookie, cookie_name);
-	if (checkCookieName(file_name, cookie_name))
+	getSegmentData(cookie, cookie_name, "path", path);
+	if (checkCookieName(file_name, cookie_name, path))
 	{
 		deleteCookie(url, cookie_name);
 		printf("deleted cookie : %s.\n", cookie_name);
@@ -333,7 +334,7 @@ void getCookieName(char cookie[], char cookie_name[])
 	}
 	cookie_name[k] = 0;
 }
-int checkCookieName(char url[], char cookie_name[])
+int checkCookieName(char url[], char cookie_name[], char path[])
 {
 	char cookie_information[1024];
 	int flag;
@@ -354,15 +355,21 @@ int checkCookieName(char url[], char cookie_name[])
 		{
 			break;
 		}
+		cookie_information[strlen(cookie_information) - 1] = 0;
 		char temp[1024];
+		char temp_path[1024];
 		printf("%s", cookie_information);
 		getCookieName(cookie_information, temp);
+
+		getSegmentData(cookie_information, temp, "path", temp_path);
 		printf("cookie_information:%s.\n", cookie_name);
 		printf("temp:		  :%s.\n", temp);
-		if (strncmp(temp, cookie_name, strlen(temp) > strlen(cookie_name)? strlen(temp): strlen(cookie_name)) == 0)
+
+		if (strcmp(temp, cookie_name) == 0 && strcmp(path, temp_path) == 0)
 		{
 //			fclose(fp);
 	//		return 1;
+			fclose(fp);
 			printf("equal:%s:%s.\n", temp, cookie_name);
 			return 1;
 //			;
