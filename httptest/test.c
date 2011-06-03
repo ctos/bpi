@@ -22,7 +22,7 @@ void GetHost(char * src, char * web, char * file, int * port);
 int saveCookie(char url[], char cookie[]);
 void getCookieName(char cookie[], char cookie_name[]);
 int  checkCookieName(char url[], char cookie_name[], char path[]);
-void  deleteCookie(char url[], char cookie_name[]);
+void  deleteCookie(char url[], char cookie_name[], char path[]);
 int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
 
 /*********************************************************************
@@ -302,7 +302,7 @@ int saveCookie(char url[], char cookie[])
 	getSegmentData(cookie, cookie_name, "path", path);
 	if (checkCookieName(file_name, cookie_name, path))
 	{
-		deleteCookie(url, cookie_name);
+		deleteCookie(url, cookie_name, path);
 		printf("deleted cookie : %s.\n", cookie_name);
 	}
 
@@ -350,7 +350,7 @@ int checkCookieName(char url[], char cookie_name[], char path[])
 	while (1)
 	{
 		c = fgets(cookie_information, 1024, fp);
-		printf("c:%s.", c);
+//		printf("c:%s.", c);
 		if (c == NULL)
 		{
 			break;
@@ -358,30 +358,30 @@ int checkCookieName(char url[], char cookie_name[], char path[])
 		cookie_information[strlen(cookie_information) - 1] = 0;
 		char temp[1024];
 		char temp_path[1024];
-		printf("%s", cookie_information);
+//		printf("%s", cookie_information);
 		getCookieName(cookie_information, temp);
 
 		getSegmentData(cookie_information, temp, "path", temp_path);
-		printf("cookie_information:%s.\n", cookie_name);
-		printf("temp:		  :%s.\n", temp);
+//		printf("cookie_information:%s.\n", cookie_name);
+//		printf("temp:		  :%s.\n", temp);
 
 		if (strcmp(temp, cookie_name) == 0 && strcmp(path, temp_path) == 0)
 		{
 //			fclose(fp);
 	//		return 1;
 			fclose(fp);
-			printf("equal:%s:%s.\n", temp, cookie_name);
+//			printf("equal:%s:%s.\n", temp, cookie_name);
 			return 1;
 //			;
 		}
-		printf("check :%s\n", temp);
+//		printf("check :%s\n", temp);
 	}
 	fclose(fp);
 	
 	return 0;
 
 }
-void deleteCookie(char url[], char cookie_name[])
+void deleteCookie(char url[], char cookie_name[], char path[])
 {
 	FILE *fp = fopen(url, "a+");	
 	FILE *tp;
@@ -405,16 +405,21 @@ void deleteCookie(char url[], char cookie_name[])
 	while (fgets(read_block, BLOCK_NUM, fp))
 	{
 		char cookie_name_line[COOKIE_NAME_NUM];
-		getCookieName(read_block, cookie_name_line);
-
+		char temp_path[1024];
+		read_block[strlen(read_block) - 1] = 0;
+		getCookieName(read_block, cookie_name_line);	
+		getSegmentData(read_block, cookie_name_line, "path", temp_path);
 //		printf("read_block:%s.\n", read_block);
-//		printf("cookie_name :%s.\n", cookie_name);
-//		printf("cookie_name_line :%s.\n", cookie_name_line);
+		printf("cookie_name :%s.\n", cookie_name);
+		printf("cookie_name_line :%s.\n", cookie_name_line);
 
-		if (strcmp(cookie_name, cookie_name_line) != 0)
+		printf("path		:%s.\n", path);
+		printf("temp_path	:%s.\n",temp_path);
+		if (strcmp(cookie_name, cookie_name_line) != 0 || strcmp(path, temp_path) != 0)
 		{
 			printf("fputs : %s.\n", read_block);
 			fputs(read_block, tp);
+			fwrite("\n", 1, 1, tp);
 			fflush(tp);
 		}
 	}
