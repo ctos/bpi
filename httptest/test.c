@@ -24,7 +24,8 @@ void getCookieName(char cookie[], char cookie_name[]);
 int  checkCookieName(char url[], char cookie_name[], char path[]);
 void  deleteCookie(char url[], char cookie_name[], char path[]);
 int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
-
+void createTempFile();
+void removeTempFile();
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -179,9 +180,10 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 	   i=0;
 	   everyline_number = 0;	
 
-
+	   createTempFile();
 	   /* 连接成功了，接收http响应，response */
 
+//	   removeTempFile();
 	   while((nbytes=read(sockfd,buffer,1))==1)
 	   {
 
@@ -289,25 +291,33 @@ void GetHost(char * src, char * web, char * file, int * port)   {
 int saveCookie(char url[], char cookie[])
 {
 	FILE *fp;
-	char file_name[1024];
+	char file_name[1024] = "COOKIE/";
 	char cookie_information[1024];
 	char cookie_name[1024];
 	char path[1024];
+	char expires[1024];
 	int i;
-	strcpy(file_name, url);
 
+	getCookieName(cookie, cookie_name);
+	if (getSegmentData(cookie, cookie_name, "expires", expires))
+	{
+		strcat(file_name, url);
+	}
+	else 
+	{
+		strcat(file_name, "temp");
+	}
 
 	
-	getCookieName(cookie, cookie_name);
 	getSegmentData(cookie, cookie_name, "path", path);
 	if (checkCookieName(file_name, cookie_name, path))
 	{
-		deleteCookie(url, cookie_name, path);
+		deleteCookie(file_name, cookie_name, path);
 		printf("deleted cookie : %s.\n", cookie_name);
 	}
 
 
-	fp = fopen(file_name, "a");
+	fp = fopen(file_name, "a+");
 	for (i = 0; cookie[i] != 0; i ++)
 	{
 		fwrite(&cookie[i], 1, 1, fp);		
@@ -338,12 +348,10 @@ int checkCookieName(char url[], char cookie_name[], char path[])
 {
 	char cookie_information[1024];
 	int flag;
-	FILE *fp = fopen(url, "a+");	
+	FILE *fp;	
 	char *c;
-
-	freopen(url, "r", stdin);
 //	printf("in checkCookieName\n");
-
+	fp = fopen(url, "a+");
 	flag = 0;
 
 	printf("file %s:\n", url);
@@ -383,11 +391,12 @@ int checkCookieName(char url[], char cookie_name[], char path[])
 }
 void deleteCookie(char url[], char cookie_name[], char path[])
 {
-	FILE *fp = fopen(url, "a+");	
+	FILE *fp;	
 	FILE *tp;
 	char read_block[BLOCK_NUM];
 	char temp_file_name[] = "temp_del_cookieXXXX";
 
+	fp = fopen(url, "a+");
 	if (fp == NULL)
 	{
 		printf("Did not have cookie %s.\n", url);
@@ -410,14 +419,14 @@ void deleteCookie(char url[], char cookie_name[], char path[])
 		getCookieName(read_block, cookie_name_line);	
 		getSegmentData(read_block, cookie_name_line, "path", temp_path);
 //		printf("read_block:%s.\n", read_block);
-		printf("cookie_name :%s.\n", cookie_name);
-		printf("cookie_name_line :%s.\n", cookie_name_line);
+//		printf("cookie_name :%s.\n", cookie_name);
+//		printf("cookie_name_line :%s.\n", cookie_name_line);
 
-		printf("path		:%s.\n", path);
-		printf("temp_path	:%s.\n",temp_path);
+//		printf("path		:%s.\n", path);
+//		printf("temp_path	:%s.\n",temp_path);
 		if (strcmp(cookie_name, cookie_name_line) != 0 || strcmp(path, temp_path) != 0)
 		{
-			printf("fputs : %s.\n", read_block);
+//			printf("fputs : %s.\n", read_block);
 			fputs(read_block, tp);
 			fwrite("\n", 1, 1, tp);
 			fflush(tp);
@@ -484,6 +493,20 @@ int  getSegmentData(char cookie[], char cookie_name[], char segment_name[], char
 		}
 		return 0;
 
+}
+void createTempFile()
+{
+	FILE *fp;
+	char file_name[] = "COOKIE/temp";
+	fp = fopen(file_name, "a+");
+
+	fclose(fp);
+
+
+}
+void removeTempFile()
+{
+	remove("COOKIE/temp");	
 }
 //////////////////////////////httpclient.c 结束///////////////////////////////////////////
 

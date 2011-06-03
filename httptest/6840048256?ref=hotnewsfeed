@@ -1,0 +1,112 @@
+5e8
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="Description" content="人人网 校内是一个真实的社交网络，联络你和你周围的朋友。 加入人人网校内你可以:联络朋友，了解他们的最新动态；和朋友分享相片、音乐和电影；找到老同学，结识新朋友；用照片和日志记录生活,展示自我。" />
+<meta name="Keywords" content="Xiaonei,Renren,校内,大学,同学,同事,白领,个人主页,博客,相册,群组,社区,交友,聊天,音乐,视频,校园,人人,人人网" />
+<!--[if lte IE 7]><script type="text/javascript" src="http://s.xnimg.cn/a17120/n/core/expressions.js"></script><![endif]-->
+<link href="http://s.xnimg.cn/a20809/csspro/base/layout.css" rel="stylesheet" type="text/css" media="all" /><link href="http://xnimg.cn/favicon-rr.ico?ver=2" rel="shortcut icon" type="image/x-icon" />
+<link href="http://xnimg.cn/wap/apple_icon_.png" rel="apple-touch-icon" />
+<script type="text/javascript">
+XN = {get_check:'',env:{domain:'renren.com',shortSiteName:'人人',siteName:'人人网'}};
+</script>
+<script type="text/javascript" src="http://s.xnimg.cn/a21201/jspro/base.js"></script>    
+<script type="text/javascript">
+XN.getFileVersion(
+[
+'http://s.xnimg.cn/a19816/csspro/apps/profile.css',
+'http://s.xnimg.cn/a20457/jspro/xn.app.recommendFriend.js',
+'http://s.xnimg.cn/a13589/jspro/xn.ui.pager.js',
+'http://s.xnimg.cn/a15875/jspro/xn.ui.multiFriendSelectorBox.js',
+'http://s.xnimg.cn/a13899/csspro/module/friendSelector.css',
+'http://s.xnimg.cn/a14917/jspro/xn.app.addFriend.js',
+'http://s.xnimg.cn/a5881/jspro/xn.ui.multiFriendSelectorBox.forGuide.js',
+'http://s.xnimg.cn/a21170/jspro/xn.app.status.js',
+'http://s.xnimg.cn/a21208/jspro/xn.app.webpager.js',
+'http://s.xnimg.cn/a20989/jspro/xn.app.ilike.js',
+'http://s.xnimg.cn/a21079/jspro/lib/mediaplayer.js',
+'http://s.xnimg.cn/a18472/allunivlist.js',
+'http://s.xnimg.cn/a13200/jspro/album/ZeroClipboard.js',
+'http://a.xnimg.cn/a7107/swf/album/ZeroClipboard.swf',
+'http://s.xnimg.cn/a18324/jspro/music/music.for.feed.js',
+'http://s.xnimg.cn/a20746/jspro/xn.ui.emoticons.js',
+'http://s.xnimg.cn/a20254/csspro/module/minieditor.css',
+'http://s.xnimg.cn/a16298/csspro/module/status-pop.css'
+]);
+XN.dynamicLoad({
+file : 'http://s.xnimg.cn/a21065/jspro/xn.app.share.js',
+funcs : ['create_share_div','create_share_feed','create_share_edm','create_share_popup','create_share_jebe'] 
+});
+XN.namespace( 'user' );
+XN.user.id = '';
+XN.user.tinyPic = '';
+XN.user.name = "";try{
+$extend(XN.user,{
+userState : {
+experiment : '' == 'true'
+}
+});
+}catch(e){
+}load_jebe_ads(1);</script>
+<link href="http://s.xnimg.cn/a20740/csspro/apps/share.css" rel="stylesheet" type="text/css" media="all" />
+<title>人人网 - 登录
+</title>
+<style type="text/css">
+.login-frame{width:570px; margin:0 auto;}
+.lf-head{height:35px; background:#005EAC;}
+.lf-head a img{border:0;display:block;}
+.lf-container{border:1px solid #CEE1EE; height:290px; border-top:0;}
+.lf-form{width:317px;height:100%;float:left;border-right:1px solid #E3EEF8; background:#F3FAFF}
+.lf-reg{width:250px;height:100%;float:right;}
+.lf-form h3{padding:60px 0 0 70px;margin-bottom:20px;}
+.lf-form p{margin-left:70px;margin-bottom:8px;}
+.lf-form p.lf-remeber,.lf-form p.lf-btn{padding-left:60px;}
+.lf-form p.lf-remeber .input-chk{margin-right:5px; padding:0;*margin-left:-4px;}
+.lf-form .input-submit{width:40px;padding:2px 0; margin-right:20px;}
+.lf-reg{text-align:center;}
+.lf-reg p.pic{padding-top:40px;margin-bottom:10px;}
+.lf-reg p.q{margin-bottom:20px;}
+.lf-reg p.reg a{display:block; width:114px; height:37px; margin:0 auto; text-indent:-9999em; outline:none;background:url(http://a.xnimg.cn/imgpro/reg/now_l.gif) no-repeat center center;}
+</style>
+</head>
+<body class="login" id="login">
+<div class="login-frame">
+<div class="lf-head">
+<a class="lf-logo" href="#">
+<img width="119px" height="35px" src="http://xnimg.cn/imgpro/logo/logo-for-activity.png" />
+</a>
+</div>
+<div class="lf-container">
+<div class="lf-form"><h3>请先登录后再继续分享</h3>
+<form method="post" action="http://www.renren.com/PLogin.do" focus="email" id="loginForm">
+<p><label>注册帐号：<input id="email" name="email" type="text" class="input-text" /></label></p>
+<p><label>注册密码：<input id="password" name="password" type="password" class="input-text" /></label></p>
+<p>
+<input type="hidden" name="origURL" value="http://share.renren.com/share/231180919/6840048256" />
+<input type="hidden" name="domain" value="renren.com" />
+<input type="hidden" name="formName" value="" />
+<input type="hidden" name="method" value="" />
+<input type="hidden" name="api_key" value="" />
+<input type="hidden" name="v" value="" />
+</p>
+<p class="lf-remeber"><label><input type="checkbox" name="autoLogin" value="true" class="input-chk" />记住我</label></p>
+<p class="lf-btn"><input type="submit" value="登录" class="input-submit" />
+<span>
+<a href="http://www.renren.com/GetPasswd.do">忘记密码？</a>
+</span>
+</p>
+</form>
+</div>
+<div class="lf-reg">
+<p class="pic"><img width="190" height="140" src="http://xnimg.cn/imgpro/reg/share.png" /></p>
+<p class="q"><a href="http://wwv.renren.com/xn.do?ss=10140&rt=1">还没有开通你的人人网帐号？</a></p>
+<p class="reg"><a href="http://wwv.renren.com/xn.do?ss=10140&rt=1">立即注册</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+0
+
