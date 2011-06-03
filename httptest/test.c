@@ -56,135 +56,135 @@ int main(int argc, char *argv[])
 	   if(argc!=2)
 
 	   {
-	
+
 		   fprintf(stderr,"Usage:%s web-address\a\n",argv[0]);
-		
+
 		   exit(1);
-		
+
 	   }
-	
+
 	   printf("parameter.1 is: %s\n", argv[1]);
-	
 
 
 
 
-	
+
+
 	   GetHost(argv[1], host_addr, host_file, &portnumber);/*分析网址、端口、文件名等*/
-	
+
 	   printf("webhost:%s\n", host_addr);
-	
+
 	   printf("hostfile:%s\n", host_file);
-	
+
 	   printf("portnumber:%d\n\n", portnumber);
 
 
-	
+
 	   if((host=gethostbyname(host_addr))==NULL)/*取得主机IP地址*/
-	
+
 	   {
-	
+
 		   fprintf(stderr,"Gethostname error, %s\n", strerror(errno));
-		
+
 		   exit(1);
-		
+
 	   }
 
 
-	
+
 	   /* 客户程序开始建立 sockfd描述符 */
-	
 
-	   
+
+
 	   if((sockfd=socket(AF_INET,SOCK_STREAM,0))==-1)/*建立SOCKET连接*/
-		
+
 	   {
-	
+
 		   fprintf(stderr,"Socket Error:%s\a\n",strerror(errno));
-		
+
 		   exit(1);
-		
+
 	   }
 
 
-	
+
 	   /* 客户程序填充服务端的资料 */
-	
+
 	   bzero(&server_addr,sizeof(server_addr));
 	   server_addr.sin_family=AF_INET;
 	   server_addr.sin_port=htons(portnumber);
 	   server_addr.sin_addr=*((struct in_addr *)host->h_addr);
 
 	   /* 客户程序发起连接请求 */
-	
+
 	   if(connect(sockfd,(struct sockaddr *)(&server_addr),sizeof(struct sockaddr))==-1)/*连接网站*/
-	
+
 	   {
 		   fprintf(stderr,"Connect Error:%s\a\n",strerror(errno));
 		   exit(1);
 	   }
 
-		
+
 		sprintf(request, "GET /%s HTTP/1.1\r\nAccept: */*\r\nAccept-Language: zh-cn\r\n\
 User-Agent: Mozilla/5.0\r\n\
 Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber); 
 	   printf("%s", request);/*准备request，将要发送给主机*/
-	
+
 	   /*取得真实的文件名*/
-	
+
 	   if(host_file && *host_file)   pt = Rstrchr(host_file, '/');
 	   else pt = 0;
 
 	   memset(local_file, 0, sizeof(local_file));
-	
+
 	   if(pt && *pt)   {
 		   if((pt + 1) && *(pt+1))   strcpy(local_file, pt + 1);
 		   else   memcpy(local_file, host_file, strlen(host_file) - 1);
 	   }
-	
+
 	   else if(host_file && *host_file)   strcpy(local_file, host_file);
 	   else   strcpy(local_file, "index.html");
 	   printf("local filename to write:%s\n\n", local_file);
 
-	
+
 	   /*发送http请求request*/
 
 	   send = 0;totalsend = 0;
 	   nbytes=strlen(request);
-															     
-	   while(totalsend < nbytes) {
-	
 
-		
+	   while(totalsend < nbytes) {
+
+
+
 		   send = write(sockfd, request + totalsend, nbytes - totalsend);
-		
+
 		   if(send==-1)   {printf("send error!%s\n", strerror(errno));exit(0);}
 
 		   totalsend+=send;
 
 		   printf("%d bytes send OK!\n", totalsend);
-		
+
 	   }
 
-	
+
 	   fp = fopen(local_file, "a");
 
 	   if(!fp)   {
 		   printf("create file error! %s\n", strerror(errno));
 		   return 0;
 	   }
-	
+
 	   printf("\nThe following is the response header:\n");
-																	    
+
 	   i=0;
 	   everyline_number = 0;	
 
-	
+
 	   /* 连接成功了，接收http响应，response */
-	
+
 	   while((nbytes=read(sockfd,buffer,1))==1)
 	   {
-	
+
 		   if(i < 4)   {
 			   if(buffer[0] == '\r' || buffer[0] == '\n')  
 			   {
@@ -195,9 +195,10 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 				   char *ptr;
 				   if ((ptr = strstr(head_line, SET_COOKIE)) != NULL)
 				   {
+					   fflush(fp);
 					saveCookie(host_addr, ptr + strlen(SET_COOKIE));
 
-				   
+
 				   }
 			   }
 			   else 
@@ -220,11 +221,11 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 		   i++;
 		   if (i % 1024 == 0) fflush(fp);	   
 	   }
-	
+
 	   fclose(fp);
 	   /* 结束通讯 */
 	   close(sockfd);
-	
+
 	   exit(0);
 }
 /********************************************
@@ -255,33 +256,33 @@ void GetHost(char * src, char * web, char * file, int * port)   {
         if(!(*src))   return;
 	pA = src;
 	if(!strncmp(pA, "http://", strlen("http://")))   pA = src+strlen("http://");
-	
+
 	else if(!strncmp(pA, "https://", strlen("https://")))   pA = src+strlen("https://");			
 	pB = strchr(pA, '/');			 
 	if(pB)   {
-			
+
 		memcpy(web, pA, strlen(pA) - strlen(pB));
-		
+
 		if(pB+1)   {
-		
+
 			memcpy(file, pB + 1, strlen(pB) - 1);
-			
+
 			file[strlen(pB) - 1] = 0;
-			
+
 		}
-		
+
 	}
-	
+
 	else   memcpy(web, pA, strlen(pA));
-	
+
 	if(pB)   web[strlen(pA) - strlen(pB)] = 0;
-	
+
 	else   web[strlen(pA)] = 0;
-	
+
 	pA = strchr(web, ':');
-	
+
 	if(pA)   *port = atoi(pA + 1);
-	
+
 	else *port = 80;
 }
 
@@ -295,7 +296,7 @@ int saveCookie(char url[], char cookie[])
 	int i;
 	strcpy(file_name, url);
 
-	
+
 
 	getCookieName(cookie, cookie_name);
 	if (checkCookieName(file_name, cookie_name))
@@ -304,15 +305,17 @@ int saveCookie(char url[], char cookie[])
 		printf("deleted cookie : %s.\n", cookie_name);
 	}
 
-		
+
 	fp = fopen(file_name, "a");
 	for (i = 0; cookie[i] != 0; i ++)
 	{
 		fwrite(&cookie[i], 1, 1, fp);		
+		fflush(fp);
 	}
-		
+
 		fwrite("\n", 1, 1, fp);
 
+	fflush(fp);
 //	printf("url : %s\n cookie : %s\n", url, cookie);
 	fclose(fp);
 }
@@ -332,36 +335,43 @@ void getCookieName(char cookie[], char cookie_name[])
 }
 int checkCookieName(char url[], char cookie_name[])
 {
-	FILE *fp;
-	char file_name[1024];
 	char cookie_information[1024];
-	int already_have_cookie;
+	int flag;
+	FILE *fp = fopen(url, "a+");	
+	char *c;
 
-	strcpy(file_name, url);
-
-	freopen(file_name, "r", stdin);
+	freopen(url, "r", stdin);
 //	printf("in checkCookieName\n");
 
-	already_have_cookie = 0;
+	flag = 0;
 
-	while (fgets(cookie_information, 1024, stdin) != NULL)
+	printf("file %s:\n", url);
+	while (1)
 	{
-		char temp[1024];
-		getCookieName(cookie_information, temp);
-		if (strcmp(temp, cookie_name) == 0)
+		c = fgets(cookie_information, 1024, fp);
+		printf("c:%s.", c);
+		if (c == NULL)
 		{
-			already_have_cookie = 1;		
 			break;
 		}
-//		printf("check : %s\n", temp);
+		char temp[1024];
+		printf("%s", cookie_information);
+		getCookieName(cookie_information, temp);
+		printf("cookie_information:%s.\n", cookie_name);
+		printf("temp:		  :%s.\n", temp);
+		if (strncmp(temp, cookie_name, strlen(temp) > strlen(cookie_name)? strlen(temp): strlen(cookie_name)) == 0)
+		{
+//			fclose(fp);
+	//		return 1;
+			printf("equal:%s:%s.\n", temp, cookie_name);
+			return 1;
+//			;
+		}
+		printf("check :%s\n", temp);
 	}
-	if (already_have_cookie)
-	{
-		printf("already have the cookie\n");
-		return 1;
-	}
-	return 0;
+	fclose(fp);
 	
+	return 0;
 
 }
 void deleteCookie(char url[], char cookie_name[])
@@ -375,7 +385,7 @@ void deleteCookie(char url[], char cookie_name[])
 	{
 		printf("Did not have cookie %s.\n", url);
 	}
-	
+
 	mkstemp(temp_file_name);
 
 	tp = fopen(temp_file_name, "a+");
@@ -389,35 +399,37 @@ void deleteCookie(char url[], char cookie_name[])
 	{
 		char cookie_name_line[COOKIE_NAME_NUM];
 		getCookieName(read_block, cookie_name_line);
-		
-		printf("read_block:%s.\n", read_block);
-		printf("cookie_name :%s.\n", cookie_name);
-		printf("cookie_name_line :%s.\n", cookie_name_line);
+
+//		printf("read_block:%s.\n", read_block);
+//		printf("cookie_name :%s.\n", cookie_name);
+//		printf("cookie_name_line :%s.\n", cookie_name_line);
 
 		if (strcmp(cookie_name, cookie_name_line) != 0)
 		{
 			printf("fputs : %s.\n", read_block);
 			fputs(read_block, tp);
+			fflush(tp);
 		}
 	}
-	
+
 	remove(url);
 	rename(temp_file_name, url);
+	fflush(fp);
 	fclose(fp);
 }
 int  getSegmentData(char cookie[], char cookie_name[], char segment_name[], char data[])
 {
-		
+
 		char temp_name[1024];
 		getCookieName(cookie, temp_name);
-		printf("temp_name:%s.\n", temp_name);
-		printf("cookie_name:%s.\n", cookie_name);
+//		printf("temp_name:%s.\n", temp_name);
+//		printf("cookie_name:%s.\n", cookie_name);
 		if (strcmp(temp_name, cookie_name) != 0)
 		{
 			data[0] = 0;
 			return 0;
 		}
-		
+
 		int i = 0;
 		while (cookie[i] != 0)
 		{
@@ -425,7 +437,7 @@ int  getSegmentData(char cookie[], char cookie_name[], char segment_name[], char
 			char temp_segment_name[1024];
 			int k;
 			int l;
-			
+
 			for (; cookie[i] != 0 && (cookie[i] == ' ' || cookie[i] == ';'); i++);
 			for (k = 0, l = 0; cookie[i] != 0; i ++)
 			{
@@ -462,3 +474,4 @@ int  getSegmentData(char cookie[], char cookie_name[], char segment_name[], char
 
 }
 //////////////////////////////httpclient.c 结束///////////////////////////////////////////
+
