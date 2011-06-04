@@ -26,6 +26,7 @@ void  deleteCookie(char url[], char cookie_name[], char path[]);
 int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
 void createTempFile();
 void removeTempFile();
+int  deletePath(char cookie[]);
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -296,6 +297,7 @@ int saveCookie(char url[], char cookie[])
 	char cookie_name[1024];
 	char path[1024];
 	char expires[1024];
+	char absolute_path[1024];
 	int i;
 
 	getCookieName(cookie, cookie_name);
@@ -308,15 +310,22 @@ int saveCookie(char url[], char cookie[])
 		strcat(file_name, "temp");
 	}
 
-	
+
 	getSegmentData(cookie, cookie_name, "path", path);
-	if (checkCookieName(file_name, cookie_name, path))
+	strcpy(absolute_path, url);
+	strcat(absolute_path, path);
+
+	if (checkCookieName(file_name, cookie_name, absolute_path))
 	{
-		deleteCookie(file_name, cookie_name, path);
+		deleteCookie(file_name, cookie_name, absolute_path);
 		printf("deleted cookie : %s.\n", cookie_name);
 	}
 
 
+	deletePath(cookie);
+
+	strcat(cookie, "; path=");
+	strcat(cookie, absolute_path);
 	fp = fopen(file_name, "a+");
 	for (i = 0; cookie[i] != 0; i ++)
 	{
@@ -324,7 +333,7 @@ int saveCookie(char url[], char cookie[])
 		fflush(fp);
 	}
 
-		fwrite("\n", 1, 1, fp);
+	fwrite("\n", 1, 1, fp);
 
 	fflush(fp);
 //	printf("url : %s\n cookie : %s\n", url, cookie);
@@ -385,7 +394,7 @@ int checkCookieName(char url[], char cookie_name[], char path[])
 //		printf("check :%s\n", temp);
 	}
 	fclose(fp);
-	
+
 	return 0;
 
 }
@@ -508,5 +517,62 @@ void removeTempFile()
 {
 	remove("COOKIE/temp");	
 }
-//////////////////////////////httpclient.c 结束///////////////////////////////////////////
+int  deletePath(char cookie[])
+{
+	
+		int i = 0;
+		while (cookie[i] != 0)
+		{
+			int flag = 0;
+			char temp_segment_name[1024];
+			char data[1024];
+			int k;
+			int l;
 
+			int recent = i;
+			for (; cookie[i] != 0 && (cookie[i] == ' ' || cookie[i] == ';'); i++);
+	
+			for (k = 0, l = 0; cookie[i] != 0; i ++)
+			{
+				if (cookie[i] == '=')
+				{
+					flag = 1;
+				}
+				else if (!flag)
+				{
+					temp_segment_name[k] = cookie[i];
+					k++;
+				}
+				else if (flag == 1 && cookie[i] != ';')
+				{
+					data[l] = cookie[i];	
+					l++;
+				}
+
+				else if (cookie[i] == ';')
+				{
+					flag = 2;
+					break;
+				}
+			}
+			temp_segment_name[k] = 0;
+			data[l] = 0;
+//			printf("temp_segment_name:%s.\n", temp_segment_name);
+//			printf("recent:%d.\n", recent);
+//			printf("i:%d.\n", i);
+			if (strcmp(temp_segment_name, "path") == 0)
+			{
+
+				int z;
+				for (z = recent; cookie[z + i - recent] != 0 ;  z++)
+				{
+					cookie[z] = cookie[z + i - recent]; 	
+				}
+				cookie[z] = 0;
+				return 1;
+			}
+		}
+		return 0;
+
+}
+/////////////////////////////httpclient.c 结束///////////////////////////////////////////
