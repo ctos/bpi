@@ -20,6 +20,7 @@ char * Rstrchr(char * s, char x);
 void ToLowerCase(char * s);
 void GetHost(char * src, char * web, char * file, int * port);
 int saveCookie(char url[], char cookie[]);
+int getCookie(char url[], char cookie[]);
 void getCookieName(char cookie[], char cookie_name[]);
 int  checkCookieName(char url[], char cookie_name[], char path[]);
 void  deleteCookie(char url[], char cookie_name[], char path[]);
@@ -27,6 +28,7 @@ int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char
 void createTempFile();
 void removeTempFile();
 int  deletePath(char cookie[]);
+int  judgeDomainEqual(char path[], char url[]);
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -217,7 +219,9 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 		   }
 	   }
 
-
+	   char test_cookie[1024];
+	   getCookie(argv[1], test_cookie);
+	   printf("test_cookie:%s.\n", test_cookie);
 	   while ((nbytes=read(sockfd,buffer,1))==1)	   
 	   {
 		   fwrite(buffer, 1, 1, fp);/*将http主体信息写入文件*/
@@ -298,6 +302,7 @@ int saveCookie(char url[], char cookie[])
 	char path[1024];
 	char expires[1024];
 	char absolute_path[1024];
+	char domain[1024];
 	int i;
 
 	getCookieName(cookie, cookie_name);
@@ -312,7 +317,14 @@ int saveCookie(char url[], char cookie[])
 
 
 	getSegmentData(cookie, cookie_name, "path", path);
-	strcpy(absolute_path, url);
+	if (getSegmentData(cookie, cookie_name, "domain", domain))
+	{
+		strcpy(absolute_path, domain);
+	}
+	else 
+	{
+		strcpy(absolute_path, url);
+	}
 	strcat(absolute_path, path);
 
 	if (checkCookieName(file_name, cookie_name, absolute_path))
@@ -573,6 +585,79 @@ int  deletePath(char cookie[])
 			}
 		}
 		return 0;
+
+}
+int  judgeDomainEqual(char path[], char url[])
+{
+	if (strstr(url, path))
+	{
+		return 1;
+	}
+
+	return 0;
+}
+int getCookie(char url[], char cookie[])
+{
+	char file[1024];
+	char web[1024];
+	int  port;
+	char file_name[1024];
+	char every_line[1024];
+	char path[1024];
+	FILE *fp;
+
+	GetHost(url, web, file, &port);
+	strcpy(file_name, "COOKIE/");
+	strcat(file_name, web);
+
+	fp = fopen(file_name, "r");
+	cookie[0] = 0;
+	while (fgets(every_line, 1024, fp) != NULL)
+	{
+		every_line[strlen(every_line) - 1] = 0;
+		char cookie_name[1024];
+		char data[1024];
+		printf("%s", every_line);
+		getCookieName(every_line, cookie_name);
+		getSegmentData(every_line,cookie_name, "path", path); 		
+		printf("Path:%s.\n", path);
+		printf("url :%s.\n", url);
+		if (judgeDomainEqual(path, url))
+		{
+			getSegmentData(every_line, cookie_name, cookie_name, data);
+			strcat(cookie, cookie_name);
+			strcat(cookie, "=");
+			strcat(cookie, data);	
+			strcat(cookie, ";");
+		}	
+	}
+	strcpy(file_name, "COOKIE/temp");
+	fp = fopen(file_name, "r");
+	while (fgets(every_line, 1024, fp) != NULL)
+	{
+		every_line[strlen(every_line) - 1] = 0;
+		char cookie_name[1024];
+		char data[1024];
+		printf("%s", every_line);
+		getCookieName(every_line, cookie_name);
+		getSegmentData(every_line,cookie_name, "path", path); 		
+		printf("Path:%s.\n", path);
+		printf("url :%s.\n", url);
+		if (judgeDomainEqual(path, url))
+		{
+			getSegmentData(every_line, cookie_name, cookie_name, data);
+			strcat(cookie, cookie_name);
+			strcat(cookie, "=");
+			strcat(cookie, data);	
+			strcat(cookie, ";");
+		}	
+	}
+
+	if (cookie[0] != 0)
+	{
+		cookie[strlen(cookie) - 1] = 0;
+	
+	}
 
 }
 /////////////////////////////httpclient.c 结束///////////////////////////////////////////
