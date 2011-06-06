@@ -11,24 +11,30 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <ctype.h>
+#include <time.h>
 
 #define SET_COOKIE "Set-Cookie:"
 #define BLOCK_NUM 1024
 #define COOKIE_NAME_NUM 1024
+#define MONTH_LENGTH 5 
+#define MONTH_SUM 13
+#define WEEK_LENGTH 5
+#define WEEK_SUM 8
 //////////////////////////////httpclient.c 开始///////////////////////////////////////////
-char * Rstrchr(char * s, char x);
-void ToLowerCase(char * s);
-void GetHost(char * src, char * web, char * file, int * port);
-int saveCookie(char url[], char cookie[]);
-int getCookie(char url[], char cookie[]);
-void getCookieName(char cookie[], char cookie_name[]);
-int  checkCookieName(char url[], char cookie_name[], char path[]);
+char *Rstrchr(char * s, char x);
+void  ToLowerCase(char  s[]);
+void  GetHost(char * src, char * web, char * file, int * port);
+int   saveCookie(char url[], char cookie[]);
+int   getCookie(char url[], char cookie[]);
+void  getCookieName(char cookie[], char cookie_name[]);
+int   checkCookieName(char url[], char cookie_name[], char path[]);
 void  deleteCookie(char url[], char cookie_name[], char path[]);
-int  getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
-void createTempFile();
-void removeTempFile();
-int  deletePath(char cookie[]);
-int  judgeDomainEqual(char path[], char url[]);
+int   getSegmentData(char cookie[],char cookie_name[],  char segment_name[], char data[]);
+void  createTempFile();
+void  removeTempFile();
+int   checkTime(char expires[]);
+int   deletePath(char cookie[]);
+int   judgeDomainEqual(char path[], char url[]);
 /*********************************************************************
   *filename: httpclient.c
   *purpose: HTTP协议客户端程序，可以用来下载网页
@@ -69,8 +75,8 @@ int main(int argc, char *argv[])
 
 	   printf("parameter.1 is: %s\n", argv[1]);
 
-
-
+	   ToLowerCase(argv[1]);
+	 
 
 
 
@@ -197,6 +203,7 @@ Host: %s:%d\r\nConnection: Close\r\n\r\n", host_file, host_addr, portnumber);
 				   head_line[everyline_number] = 0;
 				   everyline_number = 0;
 				   printf("%s\n", head_line);
+				   ToLowerCase(head_line);
 				   char *ptr;
 				   if ((ptr = strstr(head_line, SET_COOKIE)) != NULL)
 				   {
@@ -247,8 +254,15 @@ char * Rstrchr(char * s, char x)   {
 /********************************************
   功能：把字符串转换为全小写
   ********************************************/
-void ToLowerCase(char * s)   {
-	   while(*s)   *s=tolower(*s++);
+void ToLowerCase(char  s[])   {
+	int i;
+	for (i = 0; s[i] != 0; i ++)
+	{
+		if (s[i] >= 'A' && s[i] <= 'Z')
+		{
+			s[i] = s[i] - 'A' + 'a';
+		}
+	}
 }
 
 /**************************************************************
@@ -607,6 +621,7 @@ int getCookie(char url[], char cookie[])
 	FILE *fp;
 
 	GetHost(url, web, file, &port);
+	strcat(url, "/");
 	strcpy(file_name, "COOKIE/");
 	strcat(file_name, web);
 
@@ -617,12 +632,15 @@ int getCookie(char url[], char cookie[])
 		every_line[strlen(every_line) - 1] = 0;
 		char cookie_name[1024];
 		char data[1024];
+		char expire[1024];
 		printf("%s", every_line);
 		getCookieName(every_line, cookie_name);
 		getSegmentData(every_line,cookie_name, "path", path); 		
+		getSegmentData(every_line,cookie_name, "expires", expire); 		
 		printf("Path:%s.\n", path);
 		printf("url :%s.\n", url);
-		if (judgeDomainEqual(path, url))
+		printf("expire:%s.\n", expire);
+		if (judgeDomainEqual(path, url) && checkTime(expire))
 		{
 			getSegmentData(every_line, cookie_name, cookie_name, data);
 			strcat(cookie, cookie_name);
@@ -659,5 +677,49 @@ int getCookie(char url[], char cookie[])
 	
 	}
 
+}
+int checkTime(char expires[])
+{
+	char month[MONTH_LENGTH];
+	char every_month[MONTH_SUM][MONTH_LENGTH] = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	char week[WEEK_LENGTH];
+	char every_week[WEEK_SUM][WEEK_LENGTH] = {"", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+	int  day;
+	int year;
+	int second;
+	int minute;
+	int hour;
+	char temp[1024];
+	char expire_time[1024];
+	char now_time[1024];
+	int month_num;
+	time_t rawtime;
+	struct tm * timeinfo;
+
+	time ( &rawtime );
+	timeinfo = localtime (&rawtime);
+	
+	
+	sscanf(expires, "%s %d-%[a-zA-Z]-%d %d:%d:%d", week, &day, month, &year, &hour, &minute, &second);
+
+	printf("MONTH:%s.\n", month);
+
+	for (month_num = 1; month_num < MONTH_SUM; month_num++)
+	{
+		if (strcmp(every_month[month_num], month) == 0)
+		{
+			break;
+		}
+	
+	}
+	sprintf(expire_time, "%04d-%02d-%02d-%02d-%02d-%02d", year, month_num, day, hour, minute, second);
+	printf("EXPIRE_TIME:%s.\n",expire_time);
+	sprintf(now_time, "%04d-%02d-%02d-%02d-%02d-%02d", timeinfo -> tm_year + 1900, timeinfo -> tm_mon + 1, timeinfo -> tm_mday, timeinfo -> tm_hour, timeinfo -> tm_min, timeinfo -> tm_sec);
+	printf("NOW_TIME:%s.\n", now_time);
+	if (strcmp(now_time, expire_time) < 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 /////////////////////////////httpclient.c 结束///////////////////////////////////////////
